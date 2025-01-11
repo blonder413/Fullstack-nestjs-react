@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
 @Controller('ejemplo')
 export class EjemploController {
@@ -7,18 +7,23 @@ export class EjemploController {
     return 'Método Get';
   }
 
+  @Get(':id')
+  show(@Param() param) {
+    return `Método get: ${param.id}`;
+  }
+
   @Post()
   create() {
     return 'Método Post';
   }
 
-  @Put()
-  update() {
-    return 'Método put';
+  @Put('/:id')
+  update(@Param('id') id: number) {
+    return 'Método put: ' + id;
   }
 
-  @Delete()
-  destroy() {
-    return 'Método delete';
+  @Delete('/:id')
+  destroy(@Param() param) {
+    return 'Método delete: ' + param.id;
   }
 }
