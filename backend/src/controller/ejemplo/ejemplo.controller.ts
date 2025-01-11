@@ -1,4 +1,12 @@
-import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 
 @Controller('ejemplo')
 export class EjemploController {
@@ -13,8 +21,8 @@ export class EjemploController {
   }
 
   @Post()
-  create() {
-    return 'Método Post';
+  create(@Body() body) {
+    return `Método Post:  ${body.correo} ${body.password}`;
   }
 
   @Put('/:id')
