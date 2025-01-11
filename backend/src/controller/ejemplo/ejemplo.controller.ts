@@ -6,6 +6,8 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { EjemploDto } from 'src/dto/ejemplo.dto';
 
@@ -37,6 +39,7 @@ export class EjemploController {
   }
 
   @Post('/producto')
+  @UsePipes(new ValidationPipe())
   producto(@Body() dto:EjemploDto){
     return `Título: ${dto.titulo}. Descripción: ${dto.descripcion}`
   }
