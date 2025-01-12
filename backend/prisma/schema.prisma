@@ -14,7 +14,20 @@ datasource db {
 }
 
 model categoria {
-  id     Int    @id @default(autoincrement())
+  id     Int      @id @default(autoincrement())
   nombre String
-  slug   String @unique
+  slug   String   @unique
+  receta receta[]
+}
+
+model receta {
+  id           Int       @id @default(autoincrement())
+  nombre       String
+  slug         String    @unique
+  tiempo       String
+  descripcion  String    @db.LongText
+  fecha        DateTime  @default(now())
+  foto         String
+  categoria    categoria @relation(fields: [categoria_id], references: [id])
+  categoria_id Int
 }
