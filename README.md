@@ -113,3 +113,45 @@ npm install prisma --save-dev
 npx prisma
 npx prisma init
 ```
+
+### Ejecute una migración para crear sus tablas de bases de datos con Prisma Migrate
+
+Ejecute el siguiente comando para crear la base de datos y las tablas según los modelos definidos
+
+```bash
+npx prisma migrate dev --name init
+```
+
+Es posible que tengamos un error similar al siguiente
+
+```
+Error: P1010: User `blonder413` was denied access on the database `cc_nest`
+```
+
+En mi caso es porque el usuario `blonder413` no tiene permisos para crear la base de datos.
+Para solucionar esto lo primero que voy a hacer es crear la base de datos y darle permisos a mi usuario.
+
+```mysql
+create database cc_nest;
+grant all privileges on cc_nest.* to blonder413@localhost;
+flush privileges;
+```
+
+Luego de intentarlo de nuevo podemos tener un error como el siguiente
+
+```
+Error: P3014
+
+Prisma Migrate could not create the shadow database. Please make sure the database user has permission to create databases. Read more about the shadow database (and workarounds) at https://pris.ly/d/migrate-shadow
+
+Original error: Error code: P1010
+
+User `blonder413` was denied access on the database `cc_nest
+```
+
+El problema en este caso es ocasionado porque intenta crear una base de datos que ya existe.
+Para solucionarlo, lo que debemos hacer es ejecutar el siguiente comando:
+
+```bash
+npx prisma db push
+```
