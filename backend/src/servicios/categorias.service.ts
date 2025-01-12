@@ -31,11 +31,7 @@ export class CategoriasService {
   }
 
   async create(dto: CategoriaDto) {
-    const existe = await this.prisma.categoria.findFirst({
-      where: { nombre: dto.nombre },
-    });
-
-    if (existe) {
+    if (await this.find(dto)) {
       throw new HttpException(
         `La categoría ${dto.nombre} ya existe`,
         HttpStatus.CONFLICT,
@@ -46,5 +42,15 @@ export class CategoriasService {
       data: { nombre: dto.nombre, slug: slugify(dto.nombre.toLowerCase()) },
     });
     return { estado: HttpStatus.OK, mensaje: 'registro creado exitosamente' };
+  }
+
+  async find(dto: CategoriaDto) {
+    const existe = await this.prisma.categoria.findFirst({
+      where: { nombre: dto.nombre },
+    });
+    if (existe) {
+      return true;
+    }
+    return false;
   }
 }
