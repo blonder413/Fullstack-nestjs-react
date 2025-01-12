@@ -155,3 +155,8 @@ Para solucionarlo, lo que debemos hacer es ejecutar el siguiente comando:
 ```bash
 npx prisma db push
 ```
+
+## [slugify](https://www.npmjs.com/package/slugify)
+```bash
+npm i slugify
+```
