@@ -14,14 +14,18 @@ import {
 } from '@nestjs/common';
 import { EjemploDto } from 'src/dto/ejemplo.dto';
 import { EjemploInterface } from 'src/interfaces/ejemplo-interface.interface';
+import { EjemploService } from 'src/servicios/ejemplo.service';
 
 @Controller('respuesta')
 export class RespuestaController {
+  constructor(private ejemploService: EjemploService) {}
+
   @Get()
   @Header('cabecero-personalizado', 'blonder413')
   @HttpCode(HttpStatus.OK)
   index(): EjemploInterface {
-    return { estado: 'ok', mensaje: 'Método get' };
+    const mensaje = this.ejemploService.getTexto('método get');
+    return { estado: 'ok', mensaje };
   }
 
   @Get(':id')
