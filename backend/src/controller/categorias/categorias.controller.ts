@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Param } from '@nestjs/common';
 import { CategoriasService } from 'src/servicios/categorias.service';
 
 @Controller('categorias')
@@ -9,5 +9,10 @@ export class CategoriasController {
   @HttpCode(HttpStatus.OK)
   index() {
     return this.categoriaService.getDatos();
+  }
+
+  @Get('/:id')
+  show(@Param('id') id: number) {
+    return this.categoriaService.getDato(+id); // + convierte el dato a number
   }
 }
