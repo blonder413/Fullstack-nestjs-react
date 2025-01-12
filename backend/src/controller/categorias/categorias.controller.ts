@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -34,5 +35,10 @@ export class CategoriasController {
   @Put('/:id')
   update(@Param('id') id: number, @Body() dto: CategoriaDto) {
     return this.categoriaService.update(+id, dto);
+  }
+
+  @Delete('/:id')
+  destroy(@Param('id') id: number) {
+    return this.categoriaService.delete(+id);
   }
 }

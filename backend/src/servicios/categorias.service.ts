@@ -71,4 +71,20 @@ export class CategoriasService {
     });
     return { estado: HttpStatus.OK, mensaje: 'registro actualizado' };
   }
+
+  async delete(id: number) {
+    const datos = await this.prisma.categoria.findFirst({ where: { id } });
+    if (!datos) {
+      throw new HttpException('No existe', HttpStatus.NOT_FOUND);
+    }
+
+    const existe = await this.prisma.receta.findMany({
+      where: { categoria_id: id },
+    });
+    if (existe.length > 0) {
+      throw new HttpException('Existen recetas asociadas', HttpStatus.CONFLICT);
+    }
+    await this.prisma.categoria.delete({ where: { id } });
+    return { estado: 'ok', mensaje: 'Registro eliminado' };
+  }
 }
