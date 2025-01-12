@@ -76,3 +76,12 @@ export class AppModule {}
 Después debemos crear un archivo llamado `index.html` en el directorio `assets`.
 Para llamar al archivo debemos omitir el directorio especificado, en nuestro caso `assets`, llamaríamos la ruta siguiente reemplazando el nombre de la imagen:
 `http://localhost:3000/uploads/1736691963524.png`
+
+## [CORS](https://docs.nestjs.com/security/cors)
+
+El intercambio de recursos de origen cruzada (CORS) es un mecanismo que permite solicitar recursos de otro dominio.
+En `main.ts` agregamos la siguiente línea
+
+```js
+app.enableCors();
+```
