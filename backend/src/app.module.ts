@@ -8,6 +8,8 @@ import { join } from 'path';
 import { ConfigModule } from '@nestjs/config';
 import { CategoriasService } from './servicios/categorias.service';
 import { CategoriasController } from './controller/categorias/categorias.controller';
+import { RecetasController } from './controller/recetas/recetas.controller';
+import { RecetasService } from './servicios/recetas.service';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import { CategoriasController } from './controller/categorias/categorias.control
       rootPath: join(__dirname, '..', 'assets'),
     }),
   ],
-  controllers: [EjemploController, RespuestaController, UploadController, CategoriasController],
-  providers: [EjemploService, CategoriasService],
+  controllers: [EjemploController, RespuestaController, UploadController, CategoriasController, RecetasController],
+  providers: [EjemploService, CategoriasService, RecetasService],
 })
 export class AppModule {}
