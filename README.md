@@ -27,19 +27,52 @@ npm i --save class-validator class-transformer
 El archivo `main.ts` debería quedar algo así:
 
 ```javascript
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
-  await app.listen(process.env.PORT ?? 3000);
+    const app = await NestFactory.create(AppModule);
+    app.useGlobalPipes(new ValidationPipe());
+    await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
 ```
 
 ## [File upload](https://docs.nestjs.com/techniques/file-upload)
+
 ```bash
 npm i -D @types/multer
 ```
+
+##[Serve Static](https://docs.nestjs.com/recipes/serve-static)
+Permite visualizar contenido estático como imágenes a través de la URL.
+
+```bash
+npm install --save @nestjs/serve-static
+```
+
+Luego debemos configurar el archivo `app.module.ts`
+
+```js
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { join } from "path";
+
+@Module({
+    imports: [
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, "..", "assets"),
+        }),
+    ],
+    controllers: [AppController],
+    providers: [AppService],
+})
+export class AppModule {}
+```
+
+Después debemos crear un archivo llamado `index.html` en el directorio `assets`.
+Para llamar al archivo debemos omitir el directorio especificado, en nuestro caso `assets`, llamaríamos la ruta siguiente reemplazando el nombre de la imagen:
+`http://localhost:3000/uploads/1736691963524.png`
