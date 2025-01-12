@@ -6,6 +6,8 @@ import { UploadController } from './controller/upload/upload.controller';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ConfigModule } from '@nestjs/config';
+import { CategoriasService } from './servicios/categorias.service';
+import { CategoriasController } from './controller/categorias/categorias.controller';
 
 @Module({
   imports: [
@@ -14,7 +16,7 @@ import { ConfigModule } from '@nestjs/config';
       rootPath: join(__dirname, '..', 'assets'),
     }),
   ],
-  controllers: [EjemploController, RespuestaController, UploadController],
-  providers: [EjemploService],
+  controllers: [EjemploController, RespuestaController, UploadController, CategoriasController],
+  providers: [EjemploService, CategoriasService],
 })
 export class AppModule {}
