@@ -105,3 +105,11 @@ import { ConfigModule } from "@nestjs/config";
 })
 export class AppModule {}
 ```
+
+## [Prisma](https://docs.nestjs.com/recipes/prisma)
+
+```bash
+npm install prisma --save-dev
+npx prisma
+npx prisma init
+```
