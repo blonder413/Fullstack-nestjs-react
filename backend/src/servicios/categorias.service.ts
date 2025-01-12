@@ -31,6 +31,17 @@ export class CategoriasService {
   }
 
   async create(dto: CategoriaDto) {
+    const existe = await this.prisma.categoria.findFirst({
+      where: { nombre: dto.nombre },
+    });
+
+    if (existe) {
+      throw new HttpException(
+        `La categoría ${dto.nombre} ya existe`,
+        HttpStatus.CONFLICT,
+      );
+    }
+
     await this.prisma.categoria.create({
       data: { nombre: dto.nombre, slug: slugify(dto.nombre.toLowerCase()) },
     });
