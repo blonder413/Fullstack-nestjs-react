@@ -85,3 +85,23 @@ En `main.ts` agregamos la siguiente línea
 ```js
 app.enableCors();
 ```
+
+## [Configuration](https://docs.nestjs.com/techniques/configuration)
+
+Permite configurar la compatibilidad con archivos .env
+
+```bash
+npm i --save @nestjs/config
+```
+
+Luego hay que configurar el archivo `app.module.ts`
+
+```js
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+
+@Module({
+    imports: [ConfigModule.forRoot()],
+})
+export class AppModule {}
+```
