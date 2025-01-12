@@ -38,3 +38,8 @@ async function bootstrap() {
 }
 bootstrap();
 ```
+
+## [File upload](https://docs.nestjs.com/techniques/file-upload)
+```bash
+npm i -D @types/multer
+```
