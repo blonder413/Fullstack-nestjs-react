@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   FileTypeValidator,
   MaxFileSizeValidator,
@@ -10,6 +11,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { SampleDto } from 'src/dto/sample.dto';
 import { fileFilter } from 'src/helpers/images.helper';
 
 @Controller('upload')
@@ -26,7 +28,11 @@ export class UploadController {
       }),
     }),
   )
-  index(@UploadedFile() data: Express.Multer.File) {
+  index(@Body() dto: SampleDto, @UploadedFile() file: Express.Multer.File) {
+    const data = {
+      ...file,
+      producto_id: dto.producto_id,
+    };
     return { estado: 'ok', mensaje: 'Se subió el archivo', data };
   }
 
