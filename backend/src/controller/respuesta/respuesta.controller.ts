@@ -10,11 +10,12 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { EjemploDto } from 'src/dto/ejemplo.dto';
+import { EjemploInterface } from 'src/interfaces/ejemplo-interface.interface';
 
 @Controller('respuesta')
 export class RespuestaController {
   @Get()
-  index() {
+  index():EjemploInterface {
     return { estado: 'ok', mensaje: 'Método get' };
   }
 
