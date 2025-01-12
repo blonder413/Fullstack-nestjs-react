@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { CategoriaDto } from 'src/dto/categoria.dto';
 import { CategoriasService } from 'src/servicios/categorias.service';
@@ -28,5 +29,10 @@ export class CategoriasController {
   @Post()
   create(@Body() dto: CategoriaDto) {
     return this.categoriaService.create(dto);
+  }
+
+  @Put('/:id')
+  update(@Param('id') id: number, @Body() dto: CategoriaDto) {
+    return this.categoriaService.update(+id, dto);
   }
 }
