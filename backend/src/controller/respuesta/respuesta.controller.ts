@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
   Param,
   Post,
   Put,
@@ -15,7 +16,8 @@ import { EjemploInterface } from 'src/interfaces/ejemplo-interface.interface';
 @Controller('respuesta')
 export class RespuestaController {
   @Get()
-  index():EjemploInterface {
+  @Header('cabecero-personalizado', 'blonder413')
+  index(): EjemploInterface {
     return { estado: 'ok', mensaje: 'Método get' };
   }
 
