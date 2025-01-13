@@ -135,4 +135,22 @@ export class RecetasService {
 
     return { estado: 'ok', mensaje: 'Registro actualizado correctamente' };
   }
+
+  async delete(id: number) {
+    const receta = await this.prisma.receta.findFirst({
+      where: { id },
+    });
+    if (!receta) {
+      throw new HttpException(
+        'No encontrado', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        HttpStatus.NOT_FOUND,
+        // {
+        //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},
+        // },
+      );
+    }
+    fs.unlink(`./assets/uploads/recetas/${receta.foto}`, () => {});
+    await this.prisma.receta.delete({ where: { id } });
+    return { estado: 'ok', mensaje: 'Registro eliminado correctamente' };
+  }
 }
