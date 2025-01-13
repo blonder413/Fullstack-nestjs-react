@@ -1,4 +1,5 @@
-import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { RecetasService } from 'src/servicios/recetas.service';
 
 @Controller('recetas')
@@ -7,7 +8,7 @@ export class RecetasController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  async index() {
+  async index(@Req() request: Request) {
     const datos = this.recetasService.getDatos();
     const categorias = Array();
     for (const dato of await datos) {
@@ -17,7 +18,7 @@ export class RecetasController {
         slug: dato.slug,
         tiempo: dato.tiempo,
         fecha: dato.fecha,
-        foto: dato.foto,
+        foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
         categoria_id: dato.categoria.id,
         categoria: dato.categoria.nombre,
       });
