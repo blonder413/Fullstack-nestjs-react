@@ -153,4 +153,24 @@ export class RecetasService {
     await this.prisma.receta.delete({ where: { id } });
     return { estado: 'ok', mensaje: 'Registro eliminado correctamente' };
   }
+
+  async updateFoto(id: number, foto: string) {
+    const receta = await this.prisma.receta.findFirst({
+      where: { id },
+    });
+    if (!receta) {
+      fs.unlink(`./assets/uploads/recetas/${foto}`, () => {});
+      throw new HttpException(
+        'No encontrado', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        HttpStatus.NOT_FOUND,
+        // {
+        //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},
+        // },
+      );
+    }
+
+    fs.unlink(`./assets/uploads/recetas/${receta.foto}`, () => {});
+    await this.prisma.receta.update({ where: { id }, data: { foto } });
+    return { estado: 'ok', mensaje: 'Registro actualizado correctamente' };
+  }
 }

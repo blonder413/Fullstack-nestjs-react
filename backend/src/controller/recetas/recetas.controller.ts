@@ -100,4 +100,32 @@ export class RecetasController {
   delete(@Param('id') id: number) {
     return this.recetasService.delete(+id);
   }
+
+  @Post('/update-foto')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      // file es el nombre del campo recibido
+      storage: diskStorage({
+        destination: './assets/uploads/recetas',
+        filename: (req, file, callback) => {
+          callback(null, `${Date.now()}${extname(file.originalname)}`);
+        },
+      }),
+      fileFilter: fileFilter, // filtro el tipo de archivo
+    }),
+  )
+  updateFoto(
+    @Body('id') id: number,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          //   new FileTypeValidator({ fileType: '.(png|jpg|jpeg)' }), // igual el archivo se sube
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 4 }), // bytes * kb * mb
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    return this.recetasService.updateFoto(+id, file.filename);
+  }
 }
