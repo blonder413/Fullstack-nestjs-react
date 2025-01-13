@@ -10,6 +10,18 @@ export class RecetasService {
   }
 
   async getDatos() {
-    return await this.prisma.receta.findMany({ orderBy: [{ id: 'desc' }] });
+    return await this.prisma.receta.findMany({
+      orderBy: [{ id: 'desc' }],
+      select: {
+        id: true,
+        nombre: true,
+        slug: true,
+        tiempo: true,
+        descripcion: true,
+        fecha: true,
+        foto: true,
+        categoria: true,
+      },
+    });
   }
 }

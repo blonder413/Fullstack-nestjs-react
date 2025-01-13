@@ -7,7 +7,21 @@ export class RecetasController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  index() {
-    return this.recetasService.getDatos();
+  async index() {
+    const datos = this.recetasService.getDatos();
+    const categorias = Array();
+    for (const dato of await datos) {
+      categorias.push({
+        id: dato.id,
+        nombre: dato.nombre,
+        slug: dato.slug,
+        tiempo: dato.tiempo,
+        fecha: dato.fecha,
+        foto: dato.foto,
+        categoria_id: dato.categoria.id,
+        categoria: dato.categoria.nombre,
+      });
+    }
+    return categorias;
   }
 }
