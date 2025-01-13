@@ -94,4 +94,45 @@ export class RecetasService {
     });
     return { estado: 'ok', mensaje: 'registro creado exitosamente' };
   }
+
+  async update(id: number, dto: RecetaDto) {
+    const receta = await this.prisma.receta.findFirst({
+      where: { id: +id },
+    });
+    if (!receta) {
+      throw new HttpException(
+        'No encontrado', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        HttpStatus.NOT_FOUND,
+        // {
+        //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},
+        // },
+      );
+    }
+
+    const categoria = await this.prisma.categoria.findFirst({
+      where: { id: +dto.categoria_id },
+    });
+    if (!categoria) {
+      throw new HttpException(
+        'Categoría No encontrada', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        HttpStatus.NOT_FOUND,
+        // {
+        //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},
+        // },
+      );
+    }
+
+    await this.prisma.receta.update({
+      where: { id: +id },
+      data: {
+        nombre: dto.nombre,
+        slug: slugify(dto.nombre.toLowerCase()),
+        tiempo: dto.tiempo,
+        descripcion: dto.descripcion,
+        categoria_id: +dto.categoria_id,
+      },
+    });
+
+    return { estado: 'ok', mensaje: 'Registro actualizado correctamente' };
+  }
 }

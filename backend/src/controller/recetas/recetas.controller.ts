@@ -8,6 +8,7 @@ import {
   Param,
   ParseFilePipe,
   Post,
+  Put,
   Req,
   UploadedFile,
   UseInterceptors,
@@ -35,6 +36,7 @@ export class RecetasController {
         nombre: dato.nombre,
         slug: dato.slug,
         tiempo: dato.tiempo,
+        descripcion: dato.descripcion,
         fecha: dato.fecha.toLocaleDateString('es-CO'),
         foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
         categoria_id: dato.categoria.id,
@@ -86,5 +88,10 @@ export class RecetasController {
     @Body() dto: RecetaDto,
   ) {
     return this.recetasService.create(dto, file.filename);
+  }
+
+  @Put('/:id')
+  update(@Param('id') id: number, @Body() dto: RecetaDto) {
+    return this.recetasService.update(+id, dto);
   }
 }
