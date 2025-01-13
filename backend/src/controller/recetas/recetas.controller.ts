@@ -47,6 +47,27 @@ export class RecetasController {
     return categorias;
   }
 
+  @Get('/ultimos')
+  @HttpCode(HttpStatus.OK)
+  async ultimos(@Req() request: Request) {
+    const datos = this.recetasService.ultimos();
+    const categorias = Array();
+    for (const dato of await datos) {
+      categorias.push({
+        id: dato.id,
+        nombre: dato.nombre,
+        slug: dato.slug,
+        tiempo: dato.tiempo,
+        descripcion: dato.descripcion,
+        fecha: dato.fecha.toLocaleDateString('es-CO'),
+        foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
+        categoria_id: dato.categoria.id,
+        categoria: dato.categoria.nombre,
+      });
+    }
+    return categorias;
+  }
+
   @Get('/:id')
   async show(@Param('id') id: number, @Req() request: Request) {
     const dato = await this.recetasService.getDato(+id); // + convierte el dato a number

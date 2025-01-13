@@ -173,4 +173,22 @@ export class RecetasService {
     await this.prisma.receta.update({ where: { id }, data: { foto } });
     return { estado: 'ok', mensaje: 'Registro actualizado correctamente' };
   }
+
+  async ultimos() {
+    return await this.prisma.receta.findMany({
+      orderBy: [{ id: 'desc' }],
+      select: {
+        id: true,
+        nombre: true,
+        slug: true,
+        tiempo: true,
+        descripcion: true,
+        fecha: true,
+        foto: true,
+        categoria: true,
+      },
+      skip: 0,
+      take: 3,
+    });
+  }
 }
