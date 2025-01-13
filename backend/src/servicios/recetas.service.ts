@@ -191,4 +191,20 @@ export class RecetasService {
       take: 3,
     });
   }
+
+  async buscador(categoria_id: number, search: string) {
+    return await this.prisma.receta.findMany({
+      select: {
+        id: true,
+        nombre: true,
+        slug: true,
+        tiempo: true,
+        descripcion: true,
+        fecha: true,
+        foto: true,
+        categoria: true,
+      },
+      where: { categoria_id, nombre: { contains: search } },
+    });
+  }
 }

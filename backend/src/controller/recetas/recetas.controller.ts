@@ -10,6 +10,7 @@ import {
   ParseFilePipe,
   Post,
   Put,
+  Query,
   Req,
   UploadedFile,
   UseInterceptors,
@@ -51,6 +52,30 @@ export class RecetasController {
   @HttpCode(HttpStatus.OK)
   async ultimos(@Req() request: Request) {
     const datos = this.recetasService.ultimos();
+    const categorias = Array();
+    for (const dato of await datos) {
+      categorias.push({
+        id: dato.id,
+        nombre: dato.nombre,
+        slug: dato.slug,
+        tiempo: dato.tiempo,
+        descripcion: dato.descripcion,
+        fecha: dato.fecha.toLocaleDateString('es-CO'),
+        foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
+        categoria_id: dato.categoria.id,
+        categoria: dato.categoria.nombre,
+      });
+    }
+    return categorias;
+  }
+
+  @Get('/buscador')
+  @HttpCode(HttpStatus.OK)
+  async buscador(@Query() query, @Req() request: Request) {
+    const datos = this.recetasService.buscador(
+      +query.categoria_id,
+      query.search,
+    );
     const categorias = Array();
     for (const dato of await datos) {
       categorias.push({
