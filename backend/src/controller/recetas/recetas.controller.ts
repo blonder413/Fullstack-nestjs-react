@@ -1,12 +1,15 @@
 import {
+  Body,
   Controller,
   Get,
   HttpCode,
   HttpStatus,
   Param,
+  Post,
   Req,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { RecetaDto } from 'src/dto/receta.dto';
 import { RecetasService } from 'src/servicios/recetas.service';
 
 @Controller('recetas')
@@ -46,5 +49,12 @@ export class RecetasController {
       categoria_id: dato.categoria.id,
       categoria: dato.categoria.nombre,
     };
+  }
+
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() dto:RecetaDto){
+    // HACER: Cambiar el valor de la foto
+    return this.recetasService.create(dto, '1736691963524.png')
   }
 }

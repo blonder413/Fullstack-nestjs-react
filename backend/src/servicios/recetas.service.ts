@@ -1,5 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import slugify from 'slugify';
+import { RecetaDto } from 'src/dto/receta.dto';
 
 @Injectable()
 export class RecetasService {
@@ -50,5 +52,43 @@ export class RecetasService {
     } else {
       return dato;
     }
+  }
+
+  async create(dto: RecetaDto, foto: any) {
+    const categoria = await this.prisma.categoria.findFirst({
+      where: { id: +dto.categoria_id },
+    });
+    if (!categoria) {
+      throw new HttpException(
+        'No encontrado', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        HttpStatus.NOT_FOUND,
+        // {
+        //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},
+        // },
+      );
+    }
+    const existe = await this.prisma.receta.findFirst({
+      where: { nombre: dto.nombre },
+    });
+    if (existe) {
+      throw new HttpException(
+        'Ya existe la categoría', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        HttpStatus.CONFLICT,
+        // {
+        //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},
+        // },
+      );
+    }
+    await this.prisma.receta.create({
+      data: {
+        nombre: dto.nombre,
+        slug: slugify(dto.nombre.toLowerCase()),
+        tiempo: dto.tiempo,
+        descripcion: dto.descripcion,
+        categoria_id: +dto.categoria_id,
+        foto,
+      },
+    });
+    return { estado: 'ok', mensaje: 'registro creado exitosamente' };
   }
 }
