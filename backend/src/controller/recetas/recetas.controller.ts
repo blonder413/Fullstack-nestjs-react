@@ -17,7 +17,7 @@ export class RecetasController {
         nombre: dato.nombre,
         slug: dato.slug,
         tiempo: dato.tiempo,
-        fecha: dato.fecha,
+        fecha: dato.fecha.toLocaleDateString('es-CO'),
         foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
         categoria_id: dato.categoria.id,
         categoria: dato.categoria.nombre,
