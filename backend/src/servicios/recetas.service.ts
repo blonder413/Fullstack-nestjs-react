@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import slugify from 'slugify';
 import { RecetaDto } from 'src/dto/receta.dto';
+import * as fs from 'fs';
 
 @Injectable()
 export class RecetasService {
@@ -59,6 +60,7 @@ export class RecetasService {
       where: { id: +dto.categoria_id },
     });
     if (!categoria) {
+      fs.unlink(`./assets/uploads/recetas/${foto}`, () => {});
       throw new HttpException(
         'No encontrado', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
         HttpStatus.NOT_FOUND,
@@ -71,6 +73,7 @@ export class RecetasService {
       where: { nombre: dto.nombre },
     });
     if (existe) {
+      fs.unlink(`./assets/uploads/recetas/${foto}`, () => {});
       throw new HttpException(
         'Ya existe la categoría', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
         HttpStatus.CONFLICT,
