@@ -10,6 +10,8 @@ import { CategoriasService } from './servicios/categorias.service';
 import { CategoriasController } from './controller/categorias/categorias.controller';
 import { RecetasController } from './controller/recetas/recetas.controller';
 import { RecetasService } from './servicios/recetas.service';
+import { ContactoService } from './servicios/contacto.service';
+import { ContactoController } from './controller/contacto/contacto.controller';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { RecetasService } from './servicios/recetas.service';
       rootPath: join(__dirname, '..', 'assets'),
     }),
   ],
-  controllers: [EjemploController, RespuestaController, UploadController, CategoriasController, RecetasController],
-  providers: [EjemploService, CategoriasService, RecetasService],
+  controllers: [EjemploController, RespuestaController, UploadController, CategoriasController, RecetasController, ContactoController],
+  providers: [EjemploService, CategoriasService, RecetasService, ContactoService],
 })
 export class AppModule {}
