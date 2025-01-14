@@ -31,3 +31,12 @@ model receta {
   categoria    categoria @relation(fields: [categoria_id], references: [id])
   categoria_id Int
 }
+
+model contacto {
+  id       Int      @id @default(autoincrement())
+  nombre   String
+  correo   String
+  telefono String
+  mensaje  String
+  fecha    DateTime @default(now())
+}
