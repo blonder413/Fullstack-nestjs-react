@@ -157,6 +157,14 @@ npx prisma db push
 ```
 
 ## [slugify](https://www.npmjs.com/package/slugify)
+
 ```bash
 npm i slugify
+```
+
+## [NodeMailer](https://www.npmjs.com/package/@nestjs-modules/mailer)
+
+```bash
+npm install --save @nestjs-modules/mailer nodemailer
+npm install --save-dev @types/nodemailer
 ```

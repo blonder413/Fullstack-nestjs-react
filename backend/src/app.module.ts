@@ -12,6 +12,7 @@ import { RecetasController } from './controller/recetas/recetas.controller';
 import { RecetasService } from './servicios/recetas.service';
 import { ContactoService } from './servicios/contacto.service';
 import { ContactoController } from './controller/contacto/contacto.controller';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [
@@ -19,8 +20,27 @@ import { ContactoController } from './controller/contacto/contacto.controller';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'assets'),
     }),
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.SMTP_SERVER,
+        secure: false,
+        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASWORD },
+      },
+    }),
   ],
-  controllers: [EjemploController, RespuestaController, UploadController, CategoriasController, RecetasController, ContactoController],
-  providers: [EjemploService, CategoriasService, RecetasService, ContactoService],
+  controllers: [
+    EjemploController,
+    RespuestaController,
+    UploadController,
+    CategoriasController,
+    RecetasController,
+    ContactoController,
+  ],
+  providers: [
+    EjemploService,
+    CategoriasService,
+    RecetasService,
+    ContactoService,
+  ],
 })
 export class AppModule {}
