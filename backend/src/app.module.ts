@@ -13,6 +13,8 @@ import { RecetasService } from './servicios/recetas.service';
 import { ContactoService } from './servicios/contacto.service';
 import { ContactoController } from './controller/contacto/contacto.controller';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { UsuariosService } from './servicios/usuarios.service';
+import { UsuariosController } from './controller/usuarios/usuarios.controller';
 
 @Module({
   imports: [
@@ -35,12 +37,14 @@ import { MailerModule } from '@nestjs-modules/mailer';
     CategoriasController,
     RecetasController,
     ContactoController,
+    UsuariosController,
   ],
   providers: [
     EjemploService,
     CategoriasService,
     RecetasService,
     ContactoService,
+    UsuariosService,
   ],
 })
 export class AppModule {}
