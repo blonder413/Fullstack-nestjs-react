@@ -45,7 +45,8 @@ bootstrap();
 npm i -D @types/multer
 ```
 
-##[Serve Static](https://docs.nestjs.com/recipes/serve-static)
+## [Serve Static](https://docs.nestjs.com/recipes/serve-static)
+
 Permite visualizar contenido estático como imágenes a través de la URL.
 
 ```bash
@@ -167,4 +168,16 @@ npm i slugify
 ```bash
 npm install --save @nestjs-modules/mailer nodemailer
 npm install --save-dev @types/nodemailer
+```
+
+## [Passport (authentication)](https://docs.nestjs.com/recipes/passport)
+
+```bash
+npm install --save @nestjs/passport passport passport-local
+npm install --save-dev @types/passport-local
+npm install --save @nestjs/jwt passport-jwt
+npm install --save-dev @types/passport-jwt
+npm i bcrypt
+npm i -D @types/bcrypt
+npm install uuid
 ```
