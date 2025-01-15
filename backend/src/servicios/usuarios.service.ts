@@ -2,16 +2,19 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { RegistroDto } from 'src/dto/registro.dto';
 import * as bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
+import { Request } from 'express';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class UsuariosService {
   private prisma: any;
 
-  constructor() {
+  constructor(private readonly mailerService: MailerService) {
     this.prisma = new PrismaClient();
   }
 
-  async registro(dto: RegistroDto) {
+  async registro(dto: RegistroDto, request: Request) {
     const existe = await this.prisma.usuario.findFirst({
       where: { correo: dto.correo },
     });
@@ -25,6 +28,8 @@ export class UsuariosService {
         // },
       );
     }
+    const token = uuidv4();
+    const url = `${request.protocol}://${request.get('Host')}/api/v1/usuarios/verificacion/${token}`;
     await this.prisma.usuario.create({
       data: {
         nombre: dto.nombre,
@@ -32,6 +37,13 @@ export class UsuariosService {
         password: await bcrypt.hash(dto.password, 10),
         token: '',
       },
+    });
+    await this.mailerService.sendMail({
+      from: "Prueba Nestjs '<admin@midasingenieria.com>'",
+      to: dto.correo,
+      subject: 'Verificación de cuenta',
+      html: `Hola ${dto.nombre} se ha registrado exitosamente. Click aquí para verificar.<br>
+      <a href="${url}">${url}</a>`,
     });
     return { estado: 'ok', mensaje: 'Registro creado existosamente' };
   }

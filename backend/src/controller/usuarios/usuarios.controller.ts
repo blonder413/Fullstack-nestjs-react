@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Req,
+} from '@nestjs/common';
+import { Request } from 'express';
 import { RegistroDto } from 'src/dto/registro.dto';
 import { UsuariosService } from 'src/servicios/usuarios.service';
 
@@ -8,7 +16,7 @@ export class UsuariosController {
 
   @Post('registro')
   @HttpCode(HttpStatus.CREATED)
-  async registro(@Body() dto: RegistroDto) {
-    return await this.usuariosService.registro(dto);
+  async registro(@Body() dto: RegistroDto, @Req() request: Request) {
+    return await this.usuariosService.registro(dto, request);
   }
 }
