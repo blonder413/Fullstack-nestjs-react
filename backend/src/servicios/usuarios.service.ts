@@ -47,4 +47,24 @@ export class UsuariosService {
     });
     return { estado: 'ok', mensaje: 'Registro creado existosamente' };
   }
+
+  async verficar(token: any, response: any) {
+    const dato = await this.prisma.usuario.findFirst({
+      where: { token, estado_id: 2 },
+    });
+    if (!dato) {
+      throw new HttpException(
+        'No existe el usuario', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        HttpStatus.NOT_FOUND,
+        // {
+        //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},
+        // },
+      );
+    }
+    await this.prisma.usuario.update({
+      where: { id: dato.id },
+      data: { token: '', estado_id: 1 },
+    });
+    return response.redirect('http://localhost:5173/login');
+  }
 }
