@@ -89,6 +89,7 @@ export class RecetasService {
         tiempo: dto.tiempo,
         descripcion: dto.descripcion,
         categoria_id: +dto.categoria_id,
+        usuario_id: +dto.usuario_id,
         foto,
       },
     });

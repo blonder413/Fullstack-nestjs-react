@@ -12,4 +12,6 @@ export class RecetaDto {
 
   @IsNotEmpty()
   categoria_id: number;
+
+  usuario_id?: number;
 }
