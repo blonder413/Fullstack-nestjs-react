@@ -181,3 +181,9 @@ npm i bcrypt
 npm i -D @types/bcrypt
 npm install uuid
 ```
+
+# [Guards](https://docs.nestjs.com/guards)
+
+```bash
+nest g guard guard/jwt-auth
+```
