@@ -15,10 +15,16 @@ import { ContactoController } from './controller/contacto/contacto.controller';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { UsuariosService } from './servicios/usuarios.service';
 import { UsuariosController } from './controller/usuarios/usuarios.controller';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './jwt/jwt.strategy';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '24h' },
+    }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'assets'),
     }),
@@ -42,6 +48,7 @@ import { UsuariosController } from './controller/usuarios/usuarios.controller';
   providers: [
     EjemploService,
     CategoriasService,
+    JwtStrategy,
     RecetasService,
     ContactoService,
     UsuariosService,
