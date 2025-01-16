@@ -67,4 +67,29 @@ export class UsuariosService {
     });
     return response.redirect(`${process.env.BASE_URL_FRONTEND}/login`);
   }
+
+  async login(correo: string, password: string) {
+    const usuario = await this.prisma.usuario.findFirst({
+      where: { correo, estado_id: 1 },
+    });
+    if (!usuario) {
+      throw new HttpException(
+        'No existe el usuario', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        HttpStatus.BAD_REQUEST,
+        // {
+        //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},
+        // },
+      );
+    }
+    const isMatch = await bcrypt.compare(password, usuario.password);
+    if (!isMatch) {
+      throw new HttpException(
+        'Contraseña inválida', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        HttpStatus.BAD_REQUEST,
+        // {
+        //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},
+        // },
+      );
+    }
+  }
 }
