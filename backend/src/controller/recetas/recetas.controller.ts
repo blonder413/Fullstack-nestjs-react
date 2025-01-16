@@ -13,6 +13,7 @@ import {
   Query,
   Req,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -20,6 +21,7 @@ import { Request } from 'express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { RecetaDto } from 'src/dto/receta.dto';
+import { JwtAuthGuard } from 'src/guard/jwt-auth/jwt-auth.guard';
 import { fileFilter } from 'src/helpers/images.helper';
 import { RecetasService } from 'src/servicios/recetas.service';
 
@@ -108,6 +110,7 @@ export class RecetasController {
     };
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(
@@ -137,16 +140,19 @@ export class RecetasController {
     return this.recetasService.create(dto, file.filename);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   update(@Param('id') id: number, @Body() dto: RecetaDto) {
     return this.recetasService.update(+id, dto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   delete(@Param('id') id: number) {
     return this.recetasService.delete(+id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/update-foto')
   @UseInterceptors(
     FileInterceptor('file', {
