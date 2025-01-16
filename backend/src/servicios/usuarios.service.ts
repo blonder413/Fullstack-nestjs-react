@@ -65,6 +65,6 @@ export class UsuariosService {
       where: { id: dato.id },
       data: { token: '', estado_id: 1 },
     });
-    return response.redirect('http://localhost:5173/login');
+    return response.redirect(`${process.env.BASE_URL_FRONTEND}/login`);
   }
 }
