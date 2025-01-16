@@ -10,6 +10,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { LoginDto } from 'src/dto/login.dto';
 import { RegistroDto } from 'src/dto/registro.dto';
 import { UsuariosService } from 'src/servicios/usuarios.service';
 
@@ -27,5 +28,11 @@ export class UsuariosController {
   @HttpCode(HttpStatus.OK)
   async verificar(@Param() param, @Res() response: Response) {
     return this.usuariosService.verficar(param.token, response);
+  }
+
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  async login(@Body() dto: LoginDto, @Req() request: Request) {
+    return this.usuariosService.login(dto.correo, dto.password);
   }
 }
