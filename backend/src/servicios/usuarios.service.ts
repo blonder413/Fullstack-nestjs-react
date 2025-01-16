@@ -5,12 +5,16 @@ import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import { Request } from 'express';
 import { MailerService } from '@nestjs-modules/mailer';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsuariosService {
   private prisma: any;
 
-  constructor(private readonly mailerService: MailerService) {
+  constructor(
+    private readonly mailerService: MailerService,
+    private jwtService: JwtService,
+  ) {
     this.prisma = new PrismaClient();
   }
 
@@ -91,5 +95,12 @@ export class UsuariosService {
         // },
       );
     }
+
+    const payload = { username: usuario.correo, sub: usuario.id };
+    return {
+      id: usuario.id,
+      nombre: usuario.nombre,
+      token: this.jwtService.sign(payload),
+    };
   }
 }
