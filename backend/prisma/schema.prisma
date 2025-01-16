@@ -30,6 +30,8 @@ model receta {
   foto         String
   categoria    categoria @relation(fields: [categoria_id], references: [id])
   categoria_id Int
+  usuario      usuario   @relation(fields: [usuario_id], references: [id])
+  usuario_id   Int       @default(1)
 }
 
 model contacto {
@@ -48,11 +50,12 @@ model estado {
 }
 
 model usuario {
-  id        Int    @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   nombre    String
-  correo    String @unique
+  correo    String   @unique
   password  String
   token     String
-  estado    estado @relation(fields: [estado_id], references: [id])
-  estado_id Int    @default(2)
+  estado    estado   @relation(fields: [estado_id], references: [id])
+  estado_id Int      @default(2)
+  receta    receta[]
 }
