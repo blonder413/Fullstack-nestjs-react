@@ -212,4 +212,22 @@ export class RecetasService {
       where: { categoria_id, nombre: { contains: search } },
     });
   }
+
+  async recetasUsuario(id: number) {
+    return await this.prisma.receta.findMany({
+      orderBy: [{ id: 'desc' }],
+      select: {
+        id: true,
+        nombre: true,
+        slug: true,
+        tiempo: true,
+        descripcion: true,
+        fecha: true,
+        foto: true,
+        categoria: true,
+        usuario: true,
+      },
+      where: { usuario_id: id },
+    });
+  }
 }

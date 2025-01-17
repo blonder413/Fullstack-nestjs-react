@@ -75,6 +75,30 @@ export class RecetasController {
     return categorias;
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('/recetas-usuario/:id')
+  @HttpCode(HttpStatus.OK)
+  async recetasUsuario(@Param('id') id: number, @Req() request: Request) {
+    const datos = this.recetasService.recetasUsuario(+id);
+    const categorias = Array();
+    for (const dato of await datos) {
+      categorias.push({
+        id: dato.id,
+        nombre: dato.nombre,
+        slug: dato.slug,
+        tiempo: dato.tiempo,
+        descripcion: dato.descripcion,
+        fecha: dato.fecha.toLocaleDateString('es-CO'),
+        foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
+        categoria_id: dato.categoria.id,
+        categoria: dato.categoria.nombre,
+        usuario_id: dato.usuario_id,
+        usuario: dato.usuario.nombre,
+      });
+    }
+    return categorias;
+  }
+
   @Get('/buscador')
   @HttpCode(HttpStatus.OK)
   async buscador(@Query() query, @Req() request: Request) {
