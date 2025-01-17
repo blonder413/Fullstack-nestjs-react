@@ -24,6 +24,7 @@ export class RecetasService {
         fecha: true,
         foto: true,
         categoria: true,
+        usuario: true,
       },
     });
   }
@@ -40,6 +41,7 @@ export class RecetasService {
         fecha: true,
         foto: true,
         categoria: true,
+        usuario: true,
       },
     });
     if (!dato) {
@@ -187,6 +189,7 @@ export class RecetasService {
         fecha: true,
         foto: true,
         categoria: true,
+        usuario: true,
       },
       skip: 0,
       take: 3,
@@ -204,6 +207,7 @@ export class RecetasService {
         fecha: true,
         foto: true,
         categoria: true,
+        usuario: true,
       },
       where: { categoria_id, nombre: { contains: search } },
     });

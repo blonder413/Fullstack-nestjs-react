@@ -45,6 +45,8 @@ export class RecetasController {
         foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
         categoria_id: dato.categoria.id,
         categoria: dato.categoria.nombre,
+        usuario_id: dato.usuario_id,
+        usuario: dato.usuario.nombre,
       });
     }
     return categorias;
@@ -66,6 +68,8 @@ export class RecetasController {
         foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
         categoria_id: dato.categoria.id,
         categoria: dato.categoria.nombre,
+        usuario_id: dato.usuario_id,
+        usuario: dato.usuario.nombre,
       });
     }
     return categorias;
@@ -90,6 +94,8 @@ export class RecetasController {
         foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
         categoria_id: dato.categoria.id,
         categoria: dato.categoria.nombre,
+        usuario_id: dato.usuario_id,
+        usuario: dato.usuario.nombre,
       });
     }
     return categorias;
@@ -107,6 +113,8 @@ export class RecetasController {
       foto: `${request.protocol}://${request.get('Host')}/uploads/recetas/${dato.foto}`,
       categoria_id: dato.categoria.id,
       categoria: dato.categoria.nombre,
+      usuario_id: dato.usuario_id,
+      usuario: dato.usuario.nombre,
     };
   }
 
