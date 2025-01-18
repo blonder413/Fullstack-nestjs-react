@@ -187,3 +187,17 @@ npm install uuid
 ```bash
 nest g guard guard/jwt-auth
 ```
+
+# [Swagger](https://docs.nestjs.com/openapi/introduction)
+
+```bash
+npm install --save @nestjs/swagger swagger-ui-express
+```
+
+# React
+
+## Instalación
+
+```bash
+npm init vite@latest
+```
