@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactDom from "react-dom/client";
-import { Home } from "./paginas/Home";
+import { Home, loader as homeLoader } from "./paginas/Home";
 import { About } from "./paginas/About";
 import { Frontend } from "./componentes/Frontend";
 
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         children: [
-            { element: <Home />, index: true },
+            { element: <Home />, index: true, loader: homeLoader },
             { element: <About />, path: "/nosotros" },
             { element: <Recetas />, path: "/recetas" },
             { element: <RecetaDetalle />, path: "/recetas/detalle" },

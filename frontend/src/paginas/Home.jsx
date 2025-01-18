@@ -1,6 +1,14 @@
 import React from "react";
+import { Link, useLoaderData } from "react-router-dom";
+import { getDatosHome } from "../servicios/HomeServices";
+
+export const loader = async () => {
+    const datos = await getDatosHome();
+    return datos;
+};
 
 export const Home = () => {
+    const datos = useLoaderData();
     return (
         <>
             <div
@@ -35,10 +43,10 @@ export const Home = () => {
                     </div>
 
                     <div className="row">
-                        {/* {datos.map((dato) => (
+                        {datos.map((dato) => (
                             <div
-                                key={dato.id}
                                 className="col-12 col-sm-6 col-lg-4"
+                                key={dato.id}
                             >
                                 <div className="single-best-receipe-area mb-30">
                                     <img
@@ -47,16 +55,16 @@ export const Home = () => {
                                         className="foto-mini"
                                     />
                                     <div className="receipe-content">
-                                        <a
-                                            href={`/recetas/detalle/${dato.id}`}
+                                        <Link
+                                            to={`recetas/detalle/${dato.id}`}
                                             title={dato.nombre}
                                         >
                                             <h5>{dato.nombre}</h5>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
-                        ))} */}
+                        ))}
                     </div>
                 </div>
             </section>

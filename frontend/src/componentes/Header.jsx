@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export const Header = () => {
     return (
@@ -71,13 +71,13 @@ export const Header = () => {
                             className="classy-navbar justify-content-between"
                             id="deliciousNav"
                         >
-                            <a href="#" className="nav-brand">
+                            <NavLink to='/' className="nav-brand">
                                 <img
                                     src="/img/core-img/logo2.png"
                                     alt="logo"
                                     style={{ width: 144, height: 65 }}
                                 />
-                            </a>
+                            </NavLink>
 
                             <div className="classy-navbar-toggler">
                                 <span className="navbarToggler">
