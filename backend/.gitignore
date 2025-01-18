@@ -1,5 +1,6 @@
 # Imágenes
 *.png
+*.jpg
 
 # compiled output
 /dist

@@ -1,4 +1,13 @@
+import { Link, useLoaderData } from "react-router-dom";
+import { getRecetas } from "../servicios/RecetaServices";
+
+export const loader = async () => {
+    return await getRecetas();
+};
+
 export const Recetas = () => {
+    const datos = useLoaderData();
+	
     return (
         <>
             <div
@@ -44,7 +53,30 @@ export const Recetas = () => {
                         </div>
                     </div>
 
-                    <div className="row"></div>
+                    <div className="row">
+					{datos.map((dato) => (
+                            <div
+                                className="col-12 col-sm-6 col-lg-4"
+                                key={dato.id}
+                            >
+                                <div className="single-best-receipe-area mb-30">
+                                    <img
+                                        src={dato.foto}
+                                        alt={dato.nombre}
+                                        className="foto-mini"
+                                    />
+                                    <div className="receipe-content">
+                                        <Link
+                                            to={`recetas/detalle/${dato.id}`}
+                                            title={dato.nombre}
+                                        >
+                                            <h5>{dato.nombre}</h5>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+					</div>
                 </div>
             </section>
         </>
