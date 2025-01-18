@@ -230,3 +230,8 @@ npm i bootstrap-icons
 ```bash
 npm install lucide-react
 ```
+
+## [Axios](https://axios-http.com/docs/intro)
+```bash
+npm install axios
+```
