@@ -12,7 +12,8 @@ export const Home = () => {
                         <div className="col-12">
                             <div className="breadcumb-text text-center">
                                 <h2>
-                                    Recetas flaites - Desarrollado con React 18{" "}
+                                    {import.meta.env.VITE_APP_NAME} -
+                                    Desarrollado con React 18{" "}
                                 </h2>
                             </div>
                         </div>
