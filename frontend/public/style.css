@@ -49,10 +49,10 @@ a:focus {
   transition-duration: 500ms;
   text-decoration: none;
   outline: 0 solid transparent;
-  color: #000000;
   font-weight: 600;
   font-size: 14px;
-  color: #474747; }
+  color: #474747;
+}
 
 ul,
 ol {

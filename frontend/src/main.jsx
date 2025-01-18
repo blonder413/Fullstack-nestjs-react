@@ -4,6 +4,8 @@ import ReactDom from "react-dom/client";
 import { Home } from "./paginas/Home";
 import { Frontend } from "./componentes/Frontend";
 
+import "../public/style.css";
+
 const router = createBrowserRouter([
     {
         path: "/",
