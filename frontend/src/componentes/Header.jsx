@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export const Header = () => {
     return (
         <header className="header-area">
@@ -73,7 +75,7 @@ export const Header = () => {
                                 <img
                                     src="/img/core-img/logo2.png"
                                     alt="logo"
-                                    style={{width:144,height:65}}
+                                    style={{ width: 144, height: 65 }}
                                 />
                             </a>
 
@@ -94,7 +96,26 @@ export const Header = () => {
                                 </div>
 
                                 <div className="classynav">
-                                    <ul></ul>
+                                    <ul>
+                                        <li>
+                                            <NavLink to="/">Home</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/nosotros">
+                                                Sobre Nosotros
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/recetas">
+                                                Recetas
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/contacto">
+                                                Contacto
+                                            </NavLink>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </nav>
