@@ -73,7 +73,7 @@ export const Header = () => {
                                 <img
                                     src="/img/core-img/logo2.png"
                                     alt="logo"
-                                    style="width:144px; height:65px"
+                                    style={{width:144,height:65}}
                                 />
                             </a>
 
