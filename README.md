@@ -207,3 +207,14 @@ npm init vite@latest
 ```bash
 npm run dev
 ```
+
+## [React Bootstrap](https://react-bootstrap.netlify.app/)
+
+```bash
+npm install react-bootstrap bootstrap
+```
+
+## [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+```bash
+npm i react-router-dom
+```
