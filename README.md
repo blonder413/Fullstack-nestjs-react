@@ -201,3 +201,9 @@ npm install --save @nestjs/swagger swagger-ui-express
 ```bash
 npm init vite@latest
 ```
+
+## Correr proyecto
+
+```bash
+npm run dev
+```
