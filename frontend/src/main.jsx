@@ -9,6 +9,7 @@ import "../public/style.css";
 import { RecetaDetalle } from "./paginas/RecetaDetalle";
 import { Contacto } from "./paginas/Contacto";
 import { Recetas } from "./paginas/Recetas";
+import { Error404 } from "./paginas/Error404";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
             { element: <Recetas />, path: "/recetas" },
             { element: <RecetaDetalle />, path: "/recetas/detalle" },
             { element: <Contacto />, path: "/contacto" },
+            { element: <Error404 />, path: "*" },
         ],
         element: <Frontend />,
     },
