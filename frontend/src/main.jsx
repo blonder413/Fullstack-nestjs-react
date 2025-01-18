@@ -18,7 +18,7 @@ const router = createBrowserRouter([
             { element: <Home />, index: true, loader: homeLoader },
             { element: <About />, path: "/nosotros" },
             { element: <Recetas />, path: "/recetas", loader: recetasLoader },
-            { element: <RecetaDetalle />, path: "/recetas/detalle" },
+            { element: <RecetaDetalle />, path: "/recetas/detalle/:id" },
             { element: <Contacto />, path: "/contacto" },
             { element: <Error404 />, path: "*" },
         ],

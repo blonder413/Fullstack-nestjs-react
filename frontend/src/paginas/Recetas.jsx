@@ -67,7 +67,7 @@ export const Recetas = () => {
                                     />
                                     <div className="receipe-content">
                                         <Link
-                                            to={`recetas/detalle/${dato.id}`}
+                                            to={`/recetas/detalle/${dato.id}`}
                                             title={dato.nombre}
                                         >
                                             <h5>{dato.nombre}</h5>
