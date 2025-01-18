@@ -215,6 +215,18 @@ npm install react-bootstrap bootstrap
 ```
 
 ## [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+
 ```bash
 npm i react-router-dom
+```
+
+## [Bootstrap Icons](https://icons.getbootstrap.com/)
+
+```bash
+npm i bootstrap-icons
+```
+
+## [Lucide React ](https://lucide.dev/guide/packages/lucide-react)
+```bash
+npm install lucide-react
 ```
