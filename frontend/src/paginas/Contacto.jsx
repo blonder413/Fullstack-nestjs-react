@@ -6,6 +6,8 @@ export const Contacto = () => {
     const [correo, setCorreo] = useState("");
     const [telefono, setTelefono] = useState("");
     const [mensaje, setMensaje] = useState("");
+    const [boton, setBoton] = useState("inline-block");
+    const [preloader, setPreloader] = useState("none");
     const handleForm = async (e) => {
         e.preventDefault();
         if (nombre == 0 || nombre == "") {
@@ -34,6 +36,8 @@ export const Contacto = () => {
             return false;
         }
 
+        setBoton("none");
+        setPreloader("inline-block");
         if ((await sendData({ nombre, correo, telefono, mensaje })) == 201) {
             alert("Mensaje enviado correctamente");
         } else {
@@ -169,11 +173,22 @@ export const Contacto = () => {
                                         <div className="col-12 text-center">
                                             <button
                                                 className="btn delicious-btn mt-30"
+                                                style={{ display: boton }}
                                                 title="Enviar"
                                                 type="submit"
                                             >
                                                 Enviar
                                             </button>
+                                        </div>
+                                        <div className="col-12 text-center">
+                                            <img
+                                                src="/img/img/load.gif"
+                                                alt="cargando..."
+                                                style={{
+                                                    display: preloader,
+                                                    height: "4em",
+                                                }}
+                                            />
                                         </div>
                                     </div>
                                 </form>
