@@ -17,6 +17,7 @@ import {
     RecetasBuscador,
     loader as recetaBuscadorLoader,
 } from "./paginas/RecetasBuscador";
+import { Registro } from "./paginas/Registro";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
                 loader: recetaBuscadorLoader,
             },
             { element: <Contacto />, path: "/contacto" },
+            { element: <Registro />, path: "/registro" },
             { element: <Error404 />, path: "*" },
         ],
         element: <Frontend />,

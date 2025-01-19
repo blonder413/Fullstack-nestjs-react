@@ -115,6 +115,11 @@ export const Header = () => {
                                                 Contacto
                                             </NavLink>
                                         </li>
+                                        <li>
+                                            <NavLink to="/registro">
+                                                Registro
+                                            </NavLink>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
