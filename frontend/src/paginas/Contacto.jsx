@@ -1,4 +1,13 @@
+import { useState } from "react";
+
 export const Contacto = () => {
+    const [nombre, setNombre] = useState("");
+    const [correo, setCorreo] = useState("");
+    const [telefono, setTelefono] = useState("");
+    const [mensaje, setMensaje] = useState("");
+    const handleForm = async (e) => {
+        e.preventDefault();
+    };
     return (
         <>
             <div
@@ -75,7 +84,65 @@ export const Contacto = () => {
                     <div className="row">
                         <div className="col-12">
                             <div className="contact-form-area">
-                                
+                                <form onSubmit={handleForm}>
+                                    <div className="row">
+                                        <div className="col-12 col-lg-6">
+                                            <input
+                                                type="text"
+                                                id="nombre"
+                                                className="form-control"
+                                                placeholder="Nombre..."
+                                                value={nombre}
+                                                onChange={(e) =>
+                                                    setNombre(e.target.value)
+                                                }
+                                            />
+                                        </div>
+                                        <div className="col-12 col-lg-6">
+                                            <input
+                                                type="email"
+                                                id="correo"
+                                                className="form-control"
+                                                placeholder="Correo..."
+                                                value={correo}
+                                                onChange={(e) =>
+                                                    setCorreo(e.target.value)
+                                                }
+                                            />
+                                        </div>
+                                        <div className="col-12 col-lg-6">
+                                            <input
+                                                type="text"
+                                                id="telefono"
+                                                className="form-control"
+                                                placeholder="Teléfono..."
+                                                value={telefono}
+                                                onChange={(e) =>
+                                                    setTelefono(e.target.value)
+                                                }
+                                            />
+                                        </div>
+                                        <div className="col-12 col-lg-6">
+                                            <textarea
+                                                id="mensaje"
+                                                className="form-control"
+                                                placeholder="Mensaje..."
+                                                onChange={(e) =>
+                                                    setMensaje(e.target.value)
+                                                }
+                                            ></textarea>
+                                        </div>
+                                        <div className="col-12 text-center">
+                                            <button
+                                                className="btn delicious-btn mt-30"
+                                                title="Enviar"
+                                                type="submit"
+                                            >
+                                                Enviar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
