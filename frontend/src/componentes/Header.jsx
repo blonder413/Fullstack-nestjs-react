@@ -22,39 +22,21 @@ export const Header = () => {
 
                         <div className="col-12 col-sm-6">
                             <div className="top-social-info text-right">
-                                <a href="#">
+                                <a href="https://mastodon.la/@blonder413">
                                     <i
-                                        className="fa fa-pinterest"
+                                        className="fa fa-mastodon"
                                         aria-hidden="true"
                                     ></i>
                                 </a>
-                                <a href="#">
+                                <a href="https://blonder413.wordpress.com/">
                                     <i
-                                        className="fa fa-facebook"
+                                        className="fa fa-wordpress"
                                         aria-hidden="true"
                                     ></i>
                                 </a>
-                                <a href="#">
+                                <a href="https://www.linkedin.com/in/blonder413/">
                                     <i
-                                        className="fa fa-twitter"
-                                        aria-hidden="true"
-                                    ></i>
-                                </a>
-                                <a href="#">
-                                    <i
-                                        className="fa fa-dribbble"
-                                        aria-hidden="true"
-                                    ></i>
-                                </a>
-                                <a href="#">
-                                    <i
-                                        className="fa fa-behance"
-                                        aria-hidden="true"
-                                    ></i>
-                                </a>
-                                <a href="#">
-                                    <i
-                                        className="fa fa-router-linkedin"
+                                        className="fa fa-linkedin"
                                         aria-hidden="true"
                                     ></i>
                                 </a>
@@ -118,6 +100,11 @@ export const Header = () => {
                                         <li>
                                             <NavLink to="/registro">
                                                 Registro
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/login">
+                                                Login
                                             </NavLink>
                                         </li>
                                     </ul>

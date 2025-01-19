@@ -18,6 +18,7 @@ import {
     loader as recetaBuscadorLoader,
 } from "./paginas/RecetasBuscador";
 import { Registro } from "./paginas/Registro";
+import { Login } from "./paginas/Login";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
             },
             { element: <Contacto />, path: "/contacto" },
             { element: <Registro />, path: "/registro" },
+            { element: <Login />, path: "/login" },
             { element: <Error404 />, path: "*" },
         ],
         element: <Frontend />,
