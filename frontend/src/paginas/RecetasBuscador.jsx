@@ -1,5 +1,9 @@
 import { Link, redirect, useLoaderData } from "react-router-dom";
-import { getCategorias, getRecetasBuscador } from "../servicios/RecetaServices";
+import {
+    getCategoria,
+    getCategorias,
+    getRecetasBuscador,
+} from "../servicios/RecetaServices";
 import { useState } from "react";
 
 export const loader = async () => {
@@ -12,21 +16,20 @@ export const loader = async () => {
         const search = arg[1].split("=");
 
         if (search[1] == "undefined") {
-            search[1] = '';
+            search[1] = "";
         }
 
         const datos = await getRecetasBuscador(categoria[1], search[1]);
         const categorias = await getCategorias();
-        return [categorias, datos];
+        const nombreCategoria = await getCategoria(categoria[1]);
+        return [categorias, datos, nombreCategoria];
     } else {
         return redirect("/error");
     }
-
 };
 
 export const RecetasBuscador = () => {
-    const [categorias, datos] = useLoaderData();
-
+    const [categorias, datos, nombreCategoria] = useLoaderData();
     const [search, setSearch] = useState();
     const [categoria_id, setCategoria_id] = useState();
     const handleSubmit = async (e) => {
@@ -47,7 +50,7 @@ export const RecetasBuscador = () => {
                     <div className="row h-100 align-items-center">
                         <div className="col-12">
                             <div className="breadcumb-text text-center">
-                                <h2>Recetas</h2>
+                                <h2>Recetas: {nombreCategoria.nombre}</h2>
                             </div>
                         </div>
                     </div>

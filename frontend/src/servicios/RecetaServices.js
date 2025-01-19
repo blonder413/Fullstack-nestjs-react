@@ -72,3 +72,20 @@ export const getCategorias = async () => {
         });
     return dato;
 };
+
+export const getCategoria = async (id) => {
+    const dato = axios
+        .get(`${import.meta.env.VITE_API_URL}categorias/${id}`, {
+            headers: { "content-type": "application/json" },
+        })
+        .then((response) => {
+            if (response.status == 200) {
+                return response.data;
+            }
+            console.log("Falló");
+        })
+        .catch((err) => {
+            console.log(`Falló: ${err}`);
+        });
+    return dato;
+};
