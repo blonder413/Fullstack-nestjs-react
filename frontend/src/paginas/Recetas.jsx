@@ -1,20 +1,21 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { getRecetas } from "../servicios/RecetaServices";
+import { getCategorias, getRecetas } from "../servicios/RecetaServices";
 import { useState } from "react";
 
 export const loader = async () => {
-    return await getRecetas();
+    const datos = await getRecetas();
+    const categorias = await getCategorias();
+    return [categorias, datos];
 };
 
 export const Recetas = () => {
-    const datos = useLoaderData();
+    const [categorias, datos] = useLoaderData();
 
     const [search, setSearch] = useState();
     const [categoria_id, setCategoria_id] = useState();
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(categoria_id, search);
-        
     };
 
     return (
@@ -51,6 +52,12 @@ export const Recetas = () => {
                                             <option value="0">
                                                 Seleccione...
                                             </option>
+                                            {categorias.map((categoria) => (
+                                                <option
+                                                    key={categoria.id}
+                                                    value={categoria.id}
+                                                >{categoria.nombre}</option>
+                                            ))}
                                         </select>
                                     </div>
 
