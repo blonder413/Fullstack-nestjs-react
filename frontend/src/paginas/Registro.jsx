@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { sendData } from "../servicios/ContactoService";
+import { sendDataRegistro } from "../servicios/AccesoService";
 
 export const Registro = () => {
     const [nombre, setNombre] = useState("");
@@ -32,6 +32,15 @@ export const Registro = () => {
 
         setBoton("none");
         setPreloader("inline-block");
+
+        if ((await sendDataRegistro({ nombre, correo, password })) == 201) {
+            alert(
+                "Registrado exitosamente. Se ha enviado correo de verificación"
+            );
+        } else {
+            alert("Se produjo un erro al registrarse");
+        }
+        window.location = location.href;
     };
     return (
         <>
@@ -117,9 +126,7 @@ export const Registro = () => {
                                             </button>
                                         </div>
 
-                                        <div
-                                            className="col-12 text-center mt-30"
-                                            >
+                                        <div className="col-12 text-center mt-30">
                                             <img
                                                 src="/img/img/load.gif"
                                                 alt="Enviando..."
