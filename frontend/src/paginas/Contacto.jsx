@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { sendData } from "../servicios/ContactoService";
 
 export const Contacto = () => {
     const [nombre, setNombre] = useState("");
@@ -18,9 +19,9 @@ export const Contacto = () => {
             return false;
         }
         if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(correo)) {
-            alert("El correo es inválido")
-            setCorreo("")
-            return false
+            alert("El correo es inválido");
+            setCorreo("");
+            return false;
         }
         if (telefono == 0 || telefono == "") {
             alert("El telefono es obligatorio");
@@ -32,6 +33,14 @@ export const Contacto = () => {
             setMensaje("");
             return false;
         }
+
+        if ((await sendData({ nombre, correo, telefono, mensaje })) == 201) {
+            alert("Mensaje enviado correctamente");
+        } else {
+            alert("Error al enviar el mensaje");
+        }
+
+        window.location = "/contacto";
     };
     return (
         <>
