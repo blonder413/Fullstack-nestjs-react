@@ -14,7 +14,7 @@ import { ContactoService } from 'src/servicios/contacto.service';
 export class ContactoController {
   constructor(private contactoService: ContactoService) {}
 
-  @Post('/create')
+  @Post('')
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe())
   create(@Body() dto: ContactoDto) {
