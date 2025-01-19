@@ -16,3 +16,20 @@ export const getRecetas = async () => {
         });
     return datos;
 };
+
+export const getReceta = async (id) => {
+    const dato = axios
+        .get(`${import.meta.env.VITE_API_URL}recetas/${id}`, {
+            headers: { "content-type": "application/json" },
+        })
+        .then((response) => {
+            if (response.status == 200) {
+                return response.data;
+            }
+            console.log("Falló");
+        })
+        .catch((err) => {
+            console.log(`Falló: ${err}`);
+        });
+    return dato;
+};

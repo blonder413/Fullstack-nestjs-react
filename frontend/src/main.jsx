@@ -6,7 +6,7 @@ import { About } from "./paginas/About";
 import { Frontend } from "./componentes/Frontend";
 
 import "../public/style.css";
-import { RecetaDetalle } from "./paginas/RecetaDetalle";
+import { RecetaDetalle, loader as recetaDetalleLoader } from "./paginas/RecetaDetalle";
 import { Contacto } from "./paginas/Contacto";
 import { Recetas, loader as recetasLoader } from "./paginas/Recetas";
 import { Error404 } from "./paginas/Error404";
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
             { element: <Home />, index: true, loader: homeLoader },
             { element: <About />, path: "/nosotros" },
             { element: <Recetas />, path: "/recetas", loader: recetasLoader },
-            { element: <RecetaDetalle />, path: "/recetas/detalle/:id" },
+            { element: <RecetaDetalle />, path: "/recetas/detalle/:id", loader:recetaDetalleLoader },
             { element: <Contacto />, path: "/contacto" },
             { element: <Error404 />, path: "*" },
         ],

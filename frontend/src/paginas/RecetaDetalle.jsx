@@ -1,4 +1,16 @@
+import { useLoaderData } from "react-router-dom";
+import { getReceta } from "../servicios/RecetaServices";
+
+export const loader = async ({ params }) => {
+    const dato = await getReceta(params.id);
+    if (!dato) {
+        window.location = "/error";
+    }
+    return dato;
+};
+
 export const RecetaDetalle = () => {
+    const dato = useLoaderData();
     return (
         <>
             <div
@@ -9,7 +21,7 @@ export const RecetaDetalle = () => {
                     <div className="row h-100 align-items-center">
                         <div className="col-12">
                             <div className="breadcumb-text text-center">
-                                <h2>dato.nombre</h2>
+                                <h2>{dato.nombre}</h2>
                             </div>
                         </div>
                     </div>
@@ -20,7 +32,7 @@ export const RecetaDetalle = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <img src="dato.foto" alt="dato.nombre" />
+                            <img src={dato.foto} alt={dato.nombre} />
                         </div>
                     </div>
                 </div>
@@ -30,12 +42,12 @@ export const RecetaDetalle = () => {
                         <div className="row">
                             <div className="col-12 col-md-8">
                                 <div className="receipe-headline my-5">
-                                    <span>dato.fecha</span>
-                                    <h2>dato.nombre</h2>
+                                    <span>{dato.fecha}</span>
+                                    <h2>{dato.nombre}</h2>
                                     <div className="receipe-duration">
-                                        <h6>Tiempo: dato.tiempo </h6>
-                                        <h6>Categoría: dato.categoria</h6>
-                                        <h6>Creada por: dato.usuario</h6>
+                                        <h6>Tiempo: {dato.tiempo} </h6>
+                                        <h6>Categoría: {dato.categoria}</h6>
+                                        <h6>Creada por: {dato.usuario}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +56,7 @@ export const RecetaDetalle = () => {
                         <div className="row">
                             <div className="col-12 col-lg-12">
                                 <div className="single-preparation-step d-flex">
-                                    <p>dato.descripcion</p>
+                                    <p>{dato.descripcion}</p>
                                 </div>
                             </div>
                         </div>
