@@ -1,11 +1,27 @@
-import { Link, useLoaderData } from "react-router-dom";
-import { getCategorias, getRecetas } from "../servicios/RecetaServices";
+import { Link, redirect, useLoaderData } from "react-router-dom";
+import { getCategorias, getRecetasBuscador } from "../servicios/RecetaServices";
 import { useState } from "react";
 
 export const loader = async () => {
-    const datos = await getRecetas();
-    const categorias = await getCategorias();
-    return [categorias, datos];
+    const ruta = window.location.href;
+    const arr = ruta.split("?");
+
+    if (arr[1]) {
+        const arg = arr[1].split("&");
+        const categoria = arg[0].split("=");
+        const search = arg[1].split("=");
+
+        if (search[1] == "undefined") {
+            search[1] = '';
+        }
+
+        const datos = await getRecetasBuscador(categoria[1], search[1]);
+        const categorias = await getCategorias();
+        return [categorias, datos];
+    } else {
+        return redirect("/error");
+    }
+
 };
 
 export const RecetasBuscador = () => {
