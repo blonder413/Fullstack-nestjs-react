@@ -7,6 +7,31 @@ export const Contacto = () => {
     const [mensaje, setMensaje] = useState("");
     const handleForm = async (e) => {
         e.preventDefault();
+        if (nombre == 0 || nombre == "") {
+            alert("El nombre es obligatorio");
+            setNombre("");
+            return false;
+        }
+        if (correo == 0 || correo == "") {
+            alert("El correo es obligatorio");
+            setCorreo("");
+            return false;
+        }
+        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(correo)) {
+            alert("El correo es inválido")
+            setCorreo("")
+            return false
+        }
+        if (telefono == 0 || telefono == "") {
+            alert("El telefono es obligatorio");
+            setTelefono("");
+            return false;
+        }
+        if (mensaje == 0 || mensaje == "") {
+            alert("El mensaje es obligatorio");
+            setMensaje("");
+            return false;
+        }
     };
     return (
         <>
