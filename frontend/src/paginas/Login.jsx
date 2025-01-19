@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { sendDataRegistro } from "../servicios/AccesoService";
+import { sendDataLogin } from "../servicios/AccesoService";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+    const navigate = useNavigate();
     const [correo, setCorreo] = useState("");
     const [password, setPassword] = useState("");
     const [boton, setBoton] = useState("block");
@@ -27,14 +29,13 @@ export const Login = () => {
         setBoton("none");
         setPreloader("inline-block");
 
-        if ((await sendDataRegistro({ nombre, correo, password })) == 201) {
-            alert(
-                "Registrado exitosamente. Se ha enviado correo de verificación"
-            );
+        const login = await sendDataLogin({ correo, password });
+        if (login[1] == 200) {
+            navigate("/panel");
         } else {
-            alert("Se produjo un erro al registrarse");
+            alert("Error al iniciar sesión");
+            window.location = location.href;
         }
-        window.location = location.href;
     };
     return (
         <>
@@ -68,7 +69,6 @@ export const Login = () => {
                             <div className="contact-form-area">
                                 <form onSubmit={handleForm}>
                                     <div className="row">
-
                                         <div className="col-12 col-log-6">
                                             <input
                                                 type="text"
