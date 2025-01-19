@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { getRecetas } from "../servicios/RecetaServices";
+import { useState } from "react";
 
 export const loader = async () => {
     return await getRecetas();
@@ -7,7 +8,15 @@ export const loader = async () => {
 
 export const Recetas = () => {
     const datos = useLoaderData();
-	
+
+    const [search, setSearch] = useState();
+    const [categoria_id, setCategoria_id] = useState();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(categoria_id, search);
+        
+    };
+
     return (
         <>
             <div
@@ -29,13 +38,43 @@ export const Recetas = () => {
                 <div className="container">
                     <div className="receipe-post-search mb-80">
                         <div className="container">
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <div className="row">
-                                    <div className="col-12 col-lg-4"></div>
+                                    <div className="col-12 col-lg-4">
+                                        <select
+                                            id="categoria_id"
+                                            className="form-control"
+                                            onChange={(e) =>
+                                                setCategoria_id(e.target.value)
+                                            }
+                                        >
+                                            <option value="0">
+                                                Seleccione...
+                                            </option>
+                                        </select>
+                                    </div>
 
-                                    <div className="col-12 col-lg-4"></div>
+                                    <div className="col-12 col-lg-4">
+                                        <input
+                                            type="text"
+                                            id="search"
+                                            className="form-control"
+                                            onChange={(e) =>
+                                                setSearch(e.target.value)
+                                            }
+                                        />
+                                    </div>
 
-                                    <div className="col-12 col-lg-3 text-right"></div>
+                                    <div className="col-12 col-lg-3 text-right">
+                                        <button
+                                            type="submit"
+                                            className="btn btn-lg btn-block delicious-btn"
+                                            title="Buscar"
+                                        >
+                                            <i className="fas fa-search"></i>{" "}
+                                            Buscar
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -54,7 +93,7 @@ export const Recetas = () => {
                     </div>
 
                     <div className="row">
-					{datos.map((dato) => (
+                        {datos.map((dato) => (
                             <div
                                 className="col-12 col-sm-6 col-lg-4"
                                 key={dato.id}
@@ -76,7 +115,7 @@ export const Recetas = () => {
                                 </div>
                             </div>
                         ))}
-					</div>
+                    </div>
                 </div>
             </section>
         </>
