@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { sendDataLogin } from "../servicios/AccesoService";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthProvider";
 
 export const Login = () => {
+    const {handleIniciarSesion} = useContext(AuthContext)
     const navigate = useNavigate();
     const [correo, setCorreo] = useState("");
     const [password, setPassword] = useState("");
@@ -31,6 +33,7 @@ export const Login = () => {
 
         const login = await sendDataLogin({ correo, password });
         if (login[1] == 200) {
+            handleIniciarSesion(login[0].id, login[0].nombre, login[0].token)
             navigate("/panel");
         } else {
             alert("Error al iniciar sesión");

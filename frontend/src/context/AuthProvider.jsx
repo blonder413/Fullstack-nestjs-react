@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
         setAuthToken(localStorage.getItem("recetas_flaites_token"));
     };
     const handleIniciarSesion = (id, nombre, token) => {
+        setAuth(true)
         localStorage.setItem("recetas_flaites_id", id);
         localStorage.setItem("recetas_flaites_nombre", nombre);
         localStorage.setItem("recetas_flaites_token", token);
@@ -25,7 +26,9 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider
             value={{ auth, handleValidaLogin, handleIniciarSesion }}
-        ></AuthContext.Provider>
+        >
+            {children}
+        </AuthContext.Provider>
     );
 };
 export { AuthProvider };
