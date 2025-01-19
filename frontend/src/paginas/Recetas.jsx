@@ -15,7 +15,10 @@ export const Recetas = () => {
     const [categoria_id, setCategoria_id] = useState();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(categoria_id, search);
+        if (categoria_id == undefined) {
+            return false;
+        }
+        window.location = `/recetas/buscador?categoria_id=${categoria_id}&search=${search}`;
     };
 
     return (
@@ -56,7 +59,9 @@ export const Recetas = () => {
                                                 <option
                                                     key={categoria.id}
                                                     value={categoria.id}
-                                                >{categoria.nombre}</option>
+                                                >
+                                                    {categoria.nombre}
+                                                </option>
                                             ))}
                                         </select>
                                     </div>
