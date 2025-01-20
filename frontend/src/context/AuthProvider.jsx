@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
     };
     return (
         <AuthContext.Provider
-            value={{ auth, handleValidaLogin, handleIniciarSesion }}
+            value={{ auth,authId, authNombre, authToken, handleValidaLogin, handleIniciarSesion }}
         >
             {children}
         </AuthContext.Provider>

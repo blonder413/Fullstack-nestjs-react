@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import AuthContext from "../context/AuthProvider";
 
 export const Header = () => {
+    const { authNombre } = useContext(AuthContext);
+
     return (
         <header className="header-area">
             <div className="top-header-area">
@@ -53,7 +57,7 @@ export const Header = () => {
                             className="classy-navbar justify-content-between"
                             id="deliciousNav"
                         >
-                            <NavLink to='/' className="nav-brand">
+                            <NavLink to="/" className="nav-brand">
                                 <img
                                     src="/img/core-img/logo2.png"
                                     alt="logo"
@@ -97,21 +101,29 @@ export const Header = () => {
                                                 Contacto
                                             </NavLink>
                                         </li>
-                                        <li>
-                                            <NavLink to="/registro">
-                                                Registro
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to="/login">
-                                                Login
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to="/panel">
-                                                Panel
-                                            </NavLink>
-                                        </li>
+                                        {authNombre ? (
+                                            <li>
+                                                <NavLink
+                                                    to="/panel"
+                                                    title={authNombre}
+                                                >
+                                                    {authNombre}
+                                                </NavLink>
+                                            </li>
+                                        ) : (
+                                            <>
+                                                <li>
+                                                    <NavLink to="/registro">
+                                                        Registro
+                                                    </NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="/login">
+                                                        Login
+                                                    </NavLink>
+                                                </li>
+                                            </>
+                                        )}
                                     </ul>
                                 </div>
                             </div>
