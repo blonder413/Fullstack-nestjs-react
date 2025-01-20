@@ -19,6 +19,7 @@ import {
 } from "./paginas/RecetasBuscador";
 import { Registro } from "./paginas/Registro";
 import { Login } from "./paginas/Login";
+import { Panel } from "./paginas/Panel";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
             { element: <Contacto />, path: "/contacto" },
             { element: <Registro />, path: "/registro" },
             { element: <Login />, path: "/login" },
+            { element: <Panel />, path: "/panel" },
             { element: <Error404 />, path: "*" },
         ],
         element: <Frontend />,

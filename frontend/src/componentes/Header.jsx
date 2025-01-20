@@ -107,6 +107,11 @@ export const Header = () => {
                                                 Login
                                             </NavLink>
                                         </li>
+                                        <li>
+                                            <NavLink to="/panel">
+                                                Panel
+                                            </NavLink>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
