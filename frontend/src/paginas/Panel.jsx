@@ -1,6 +1,14 @@
-import React from 'react'
+import { useContext, useEffect } from 'react'
+import AuthContext from '../context/AuthProvider'
 
 export const Panel = () => {
+  const {handleValidaLogin} = useContext(AuthContext)
+  useEffect(() => {
+    return () => {
+      handleValidaLogin()
+    }
+  }, [])
+  
   return (
     <>
       <div className="breadcumb-area bg-img bg-overlay" style={{ backgroundImage: "url(img/bg-img/breadcumb6.jpg)" }}>
