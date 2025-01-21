@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { getDatosHome } from "../servicios/HomeServices";
+import AuthContext from "../context/AuthProvider";
 
 export const loader = async () => {
     const datos = await getDatosHome();
@@ -8,7 +9,14 @@ export const loader = async () => {
 };
 
 export const Home = () => {
+    const { handleMantenerSesion } = useContext(AuthContext);
     const datos = useLoaderData();
+    useEffect(() => {
+        return () => {
+            handleMantenerSesion();
+        };
+    }, []);
+
     return (
         <>
             <div

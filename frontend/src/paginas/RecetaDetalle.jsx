@@ -1,5 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { getReceta } from "../servicios/RecetaServices";
+import { useContext, useEffect } from "react";
+import AuthContext from "../context/AuthProvider";
 
 export const loader = async ({ params }) => {
     const dato = await getReceta(params.id);
@@ -11,6 +13,12 @@ export const loader = async ({ params }) => {
 
 export const RecetaDetalle = () => {
     const dato = useLoaderData();
+    const { handleMantenerSesion } = useContext(AuthContext);
+    useEffect(() => {
+        return () => {
+            handleMantenerSesion();
+        };
+    }, []);
     return (
         <>
             <div

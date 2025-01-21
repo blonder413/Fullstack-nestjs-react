@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { sendData } from "../servicios/ContactoService";
+import AuthContext from "../context/AuthProvider";
 
 export const Contacto = () => {
+    const { handleMantenerSesion } = useContext(AuthContext);
+    useEffect(() => {
+        return () => {
+            handleMantenerSesion();
+        };
+    }, []);
     const [nombre, setNombre] = useState("");
     const [correo, setCorreo] = useState("");
     const [telefono, setTelefono] = useState("");

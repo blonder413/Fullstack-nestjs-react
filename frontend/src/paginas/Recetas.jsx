@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { getCategorias, getRecetas } from "../servicios/RecetaServices";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "../context/AuthProvider";
 
 export const loader = async () => {
     const datos = await getRecetas();
@@ -20,6 +21,12 @@ export const Recetas = () => {
         }
         window.location = `/recetas/buscador?categoria_id=${categoria_id}&search=${search}`;
     };
+    const { handleMantenerSesion } = useContext(AuthContext);
+    useEffect(() => {
+        return () => {
+            handleMantenerSesion();
+        };
+    }, []);
 
     return (
         <>

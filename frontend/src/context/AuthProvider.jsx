@@ -30,6 +30,14 @@ const AuthProvider = ({ children }) => {
             window.location = "/";
         }
     };
+    const handleMantenerSesion = () => {
+        if (auth && localStorage.getItem("recetas_flaites_id") != null) {
+            setAuth(true);
+            setAuthId(localStorage.getItem("recetas_flaites_id"));
+            setAuthNombre(localStorage.getItem("recetas_flaites_nombre"));
+            setAuthToken(localStorage.getItem("recetas_flaites_token"));
+        }
+    };
     return (
         <AuthContext.Provider
             value={{
@@ -40,6 +48,7 @@ const AuthProvider = ({ children }) => {
                 handleValidaLogin,
                 handleIniciarSesion,
                 handleCerrarSesion,
+                handleMantenerSesion,
             }}
         >
             {children}

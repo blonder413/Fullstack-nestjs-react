@@ -1,4 +1,13 @@
+import { useContext, useEffect } from "react";
+import AuthContext from "../context/AuthProvider";
+
 export const About = () => {
+    const { handleMantenerSesion } = useContext(AuthContext);
+    useEffect(() => {
+        return () => {
+            handleMantenerSesion();
+        };
+    }, []);
     return (
         <>
             <div
