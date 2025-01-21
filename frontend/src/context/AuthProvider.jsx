@@ -18,14 +18,29 @@ const AuthProvider = ({ children }) => {
         setAuthToken(localStorage.getItem("recetas_flaites_token"));
     };
     const handleIniciarSesion = (id, nombre, token) => {
-        setAuth(true)
+        setAuth(true);
         localStorage.setItem("recetas_flaites_id", id);
         localStorage.setItem("recetas_flaites_nombre", nombre);
         localStorage.setItem("recetas_flaites_token", token);
     };
+    const handleCerrarSesion = () => {
+        if (window.confirm("¿Realmente desea cerrar la sesión?")) {
+            localStorage.clear();
+            setAuth(false);
+            window.location = "/";
+        }
+    };
     return (
         <AuthContext.Provider
-            value={{ auth,authId, authNombre, authToken, handleValidaLogin, handleIniciarSesion }}
+            value={{
+                auth,
+                authId,
+                authNombre,
+                authToken,
+                handleValidaLogin,
+                handleIniciarSesion,
+                handleCerrarSesion,
+            }}
         >
             {children}
         </AuthContext.Provider>

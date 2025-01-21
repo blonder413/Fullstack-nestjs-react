@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
 
 export const Header = () => {
-    const { authNombre } = useContext(AuthContext);
+    const { authNombre, handleCerrarSesion } = useContext(AuthContext);
 
     return (
         <header className="header-area">
@@ -109,6 +109,7 @@ export const Header = () => {
                                                 >
                                                     {authNombre}
                                                 </NavLink>
+                                                <NavLink onClick={handleCerrarSesion} title="Cerrar sesión">Cerrar sesión</NavLink>
                                             </li>
                                         ) : (
                                             <>
