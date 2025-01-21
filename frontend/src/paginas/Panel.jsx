@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthProvider";
+import { Link } from "react-router-dom";
 
 export const Panel = () => {
     const { handleValidaLogin } = useContext(AuthContext);
@@ -80,7 +81,48 @@ export const Panel = () => {
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody>
+                                        {datos.map((dato) => (
+                                            <tr key={dato.id}>
+                                                <td>{dato.id}</td>
+                                                <td>{dato.categoria}</td>
+                                                <td>{dato.nombre}</td>
+                                                <td>{dato.tiempo}</td>
+                                                <td>{dato.descripcion}</td>
+                                                <td className="text-center">
+                                                    <Link to={dato.foto}>
+                                                        <img
+                                                            src={dato.foto}
+                                                            alt={dato.nombre}
+                                                            width={50}
+                                                            title={dato.nombre}
+                                                        />
+                                                    </Link>
+                                                </td>
+                                                <td>
+                                                    <Link
+                                                        className="mr-2"
+                                                        title="Editar Foto"
+                                                        to={`/panel-editar/${dato.id}`}
+                                                    >
+                                                        <i className="fas fa-pen-square"></i>
+                                                    </Link>
+                                                    <Link
+                                                        className="mr-2"
+                                                        title="Editar"
+                                                    >
+                                                        <i className="fas fa-edit"></i>
+                                                    </Link>
+                                                    <Link
+                                                        className="mr-2"
+                                                        title="Eliminar"
+                                                    >
+                                                        <i className="fas fa-trash"></i>
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
