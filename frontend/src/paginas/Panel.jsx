@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthProvider";
 import { Link } from "react-router-dom";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox.css";
+import Modal from "react-bootstrap/Modal";
 
 export const Panel = () => {
     const { handleValidaLogin } = useContext(AuthContext);
@@ -32,6 +33,10 @@ export const Panel = () => {
             getRecetas();
         };
     }, []);
+    const [show, setShow] = useState(false);
+    const handleShow = () => {
+        setShow(!show);
+    };
 
     return (
         <>
@@ -63,9 +68,12 @@ export const Panel = () => {
                     <div className="row">
                         <div className="col-12">
                             <div className="receipe-ratings text-right my-5">
-                                <a className="btn delicious-btn">
+                                <button
+                                    className="btn delicious-btn"
+                                    onClick={handleShow}
+                                >
                                     <i className="fas fa-plus"></i> Crear
-                                </a>
+                                </button>
                             </div>
                         </div>
                         <hr />
@@ -136,6 +144,14 @@ export const Panel = () => {
                     </div>
                 </div>
             </div>
+            <Modal onHide={handleShow} show={show} size="lg" id="crearModal">
+                <Modal.Header>
+                    <Modal.Title><h1>Crear</h1></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    
+                </Modal.Body>
+            </Modal>
         </>
     );
 };
