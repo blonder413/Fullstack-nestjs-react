@@ -227,11 +227,19 @@ npm i bootstrap-icons
 ```
 
 ## [Lucide React ](https://lucide.dev/guide/packages/lucide-react)
+
 ```bash
 npm install lucide-react
 ```
 
 ## [Axios](https://axios-http.com/docs/intro)
+
 ```bash
 npm install axios
+```
+
+## [Fancybox](https://fancyapps.com/fancybox/)
+
+```bash
+npm install --save @fancyapps/ui
 ```

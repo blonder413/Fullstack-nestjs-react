@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthProvider";
 import { Link } from "react-router-dom";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox.css";
 
 export const Panel = () => {
     const { handleValidaLogin } = useContext(AuthContext);
@@ -90,7 +92,12 @@ export const Panel = () => {
                                                 <td>{dato.tiempo}</td>
                                                 <td>{dato.descripcion}</td>
                                                 <td className="text-center">
-                                                    <Link to={dato.foto}>
+                                                    <Link
+                                                        to={dato.foto}
+                                                        data-fancybox
+                                                        data-caption="Single image"
+                                                        className="lightbox d-block"
+                                                    >
                                                         <img
                                                             src={dato.foto}
                                                             alt={dato.nombre}
