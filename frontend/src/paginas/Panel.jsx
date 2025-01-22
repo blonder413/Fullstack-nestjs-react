@@ -8,6 +8,7 @@ import Modal from "react-bootstrap/Modal";
 export const Panel = () => {
     const { handleValidaLogin } = useContext(AuthContext);
     const [datos, setDatos] = useState([]);
+    const [categorias, setCategorias] = useState([]);
     useEffect(() => {
         const getRecetas = async () => {
             const info = await fetch(
@@ -27,12 +28,24 @@ export const Panel = () => {
             );
             setDatos(await info.json());
         };
+        const getCategorias = async () => {
+            const info = await fetch(
+                `${import.meta.env.VITE_API_URL}categorias`,
+                {
+                    headers: { "content-type": "json/application" },
+                }
+            );
+            setCategorias(await info.json());
+        };
 
         return () => {
             handleValidaLogin();
             getRecetas();
+            getCategorias();
+            
         };
     }, []);
+    
     const [show, setShow] = useState(false);
     const handleShow = () => {
         setShow(!show);
@@ -146,11 +159,11 @@ export const Panel = () => {
             </div>
             <Modal onHide={handleShow} show={show} size="lg" id="crearModal">
                 <Modal.Header>
-                    <Modal.Title><h1>Crear</h1></Modal.Title>
+                    <Modal.Title>
+                        <h1>Crear</h1>
+                    </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    
-                </Modal.Body>
+                <Modal.Body></Modal.Body>
             </Modal>
         </>
     );
