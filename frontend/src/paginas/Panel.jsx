@@ -42,13 +42,26 @@ export const Panel = () => {
             handleValidaLogin();
             getRecetas();
             getCategorias();
-            
         };
     }, []);
-    
+
     const [show, setShow] = useState(false);
-    const handleShow = () => {
+
+    const [nombre, setNombre] = useState("");
+    const [tiempo, setTiempo] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+    const [categoriaId, setCategoriaId] = useState("");
+    const [accion, setAccion] = useState(1);
+    const handleCrear = () => {
+        setAccion(1);
+        setNombre("");
+        setTiempo("");
+        setDescripcion("");
+        setCategoriaId(0);
         setShow(!show);
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
     };
 
     return (
@@ -83,7 +96,7 @@ export const Panel = () => {
                             <div className="receipe-ratings text-right my-5">
                                 <button
                                     className="btn delicious-btn"
-                                    onClick={handleShow}
+                                    onClick={handleCrear}
                                 >
                                     <i className="fas fa-plus"></i> Crear
                                 </button>
@@ -157,13 +170,96 @@ export const Panel = () => {
                     </div>
                 </div>
             </div>
-            <Modal onHide={handleShow} show={show} size="lg" id="crearModal">
+            <Modal onHide={handleCrear} show={show} size="lg" id="crearModal">
                 <Modal.Header>
                     <Modal.Title>
-                        <h1>Crear</h1>
+                        <h2>{accion == 1 ? "Crear" : "Editar"}</h2>
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body></Modal.Body>
+                <Modal.Body>
+                    <form onSubmit={handleSubmit}>
+                        <div className="row gy-3">
+                            <div className="col-lg-12">
+                                <label htmlFor="categoria_id">Categoría</label>
+                                <select
+                                    id="categoria_id"
+                                    className="form-control"
+                                    onChange={(e) =>
+                                        setCategoriaId(e.target.value)
+                                    }
+                                >
+                                    <option value="0">Selecione...</option>
+                                    {categorias.map((categoria) => (
+                                        <option
+                                            key={categoria.id}
+                                            value={categoria.id}
+                                        >
+                                            {categoria.nombre}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="col-lg-12">
+                                <label htmlFor="nombre">Nombre</label>
+                                <input
+                                    placeholder="Nombre"
+                                    type="text"
+                                    id="nombre"
+                                    className="form-control"
+                                    value={nombre}
+                                    onChange={(e) => setNombre(e.target.value)}
+                                />
+                            </div>
+                            <div className="col-lg-12">
+                                <label htmlFor="tiempo">Tiempo</label>
+                                <input
+                                    type="text"
+                                    id="tiempo"
+                                    className="form-control"
+                                    placeholder="Tiempo"
+                                    value={tiempo}
+                                    onChange={(e) => setTiempo(e.target.value)}
+                                />
+                            </div>
+                            <div className="col-lg-12">
+                                <label htmlFor="descripcion">Descripción</label>
+                                <textarea
+                                    className="form-control"
+                                    id="descripcion"
+                                    value={descripcion}
+                                    onChange={(e) =>
+                                        setDescripcion(e.target.value)
+                                    }
+                                ></textarea>
+                            </div>
+                            {accion == 1 && (
+                                <div className="col-lg-12">
+                                    <label htmlFor="foto">Foto</label>
+                                    <input
+                                        type="file"
+                                        id="foto"
+                                        className="form-control"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                        <hr />
+                        <div className="row d-flex justify-content-center">
+                            <button className="btn btn-warning" title="Guardar">
+                                {accion == 1 ? (
+                                    <>
+                                        <i className="fas fa-plus"></i> Crear
+                                    </>
+                                ) : (
+                                    <>
+                                        <i className="fas fa-pencil-alt"></i>{" "}
+                                        Editar
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </form>
+                </Modal.Body>
             </Modal>
         </>
     );
