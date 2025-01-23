@@ -12,13 +12,32 @@ export const guardarReceta = async (
     formData.append("descripcion", descripcion);
     formData.append("usuario_id", localStorage.getItem("recetas_flaites_id"));
     formData.append("file", file);
-    
+
     const respuesta = await fetch(`${import.meta.env.VITE_API_URL}recetas`, {
         method: "POST",
         body: formData,
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem("recetas_flaites_token")}`
+            Authorization: `Bearer ${localStorage.getItem(
+                "recetas_flaites_token"
+            )}`,
         },
     });
+    await respuesta.json();
+};
+
+export const editarReceta = async (receta, id) => {
+    const respuesta = await fetch(
+        `${import.meta.env.VITE_API_URL}recetas/${id}`,
+        {
+            method: "PUT",
+            body: JSON.stringify(receta),
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "recetas_flaites_token"
+                )}`,
+                "content-type": "application/json",
+            },
+        }
+    );
     await respuesta.json();
 };

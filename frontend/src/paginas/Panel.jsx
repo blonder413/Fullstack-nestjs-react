@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox.css";
 import Modal from "react-bootstrap/Modal";
-import { guardarReceta } from "../servicios/PanelService";
+import { editarReceta, guardarReceta } from "../servicios/PanelService";
 
 export const Panel = () => {
     const { handleValidaLogin } = useContext(AuthContext);
@@ -63,14 +63,14 @@ export const Panel = () => {
         setCategoriaId(0);
         setShow(!show);
     };
-    const handleEditar = (receta) => {
+    const handleEditar = async (receta) => {
         setAccion(2);
         setAccionId(receta.id);
         setNombre(receta.nombre);
         setTiempo(receta.tiempo);
         setDescripcion(receta.descripcion);
         setCategoriaId(receta.categoria_id);
-        
+
         setShow(!show);
     };
     const handleSubmit = async (e) => {
@@ -97,6 +97,16 @@ export const Panel = () => {
                 alert("Receta creada exitosamente");
             } catch (error) {
                 alert("Error al guardar la receta: " + error);
+            }
+        } else if (accion == 2) {
+            try {
+                await editarReceta(
+                    { nombre, tiempo, descripcion, categoria_id: categoriaId },
+                    accionId
+                );
+                alert("Receta editada exitosamente");
+            } catch (error) {
+                alert("Error al editar la receta: " + error);
             }
         }
         window.location = "/panel";
@@ -179,7 +189,7 @@ export const Panel = () => {
                                                     </Link>
                                                 </td>
                                                 <td>
-                                                <Link
+                                                    <Link
                                                         className="mr-2"
                                                         title="Editar Foto"
                                                     >
@@ -188,11 +198,13 @@ export const Panel = () => {
                                                     <button
                                                         className="btn btn-link"
                                                         title="Editar"
-                                                        onClick={()=>handleEditar(dato)}
+                                                        onClick={() =>
+                                                            handleEditar(dato)
+                                                        }
                                                     >
                                                         <i className="fas fa-edit"></i>
                                                     </button>
-                                                    
+
                                                     <Link
                                                         className="mr-2"
                                                         title="Eliminar"
