@@ -41,3 +41,25 @@ export const editarReceta = async (receta, id) => {
     );
     await respuesta.json();
 };
+
+export const editarFoto = async (id) => {
+    const file = document.querySelector("input[type=file]").files[0];
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("id", id);
+    const respuesta = await fetch(
+        `${import.meta.env.VITE_API_URL}recetas/update-foto`,
+        {
+            method: "POST",
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "recetas_flaites_token"
+                )}`,
+            },
+        }
+    );
+
+    return respuesta.status;
+};

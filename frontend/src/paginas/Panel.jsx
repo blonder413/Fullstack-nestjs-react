@@ -192,6 +192,7 @@ export const Panel = () => {
                                                     <Link
                                                         className="mr-2"
                                                         title="Editar Foto"
+                                                        to={`/panel-editar/${dato.id}`}
                                                     >
                                                         <i className="fas fa-pen-square"></i>
                                                     </Link>

@@ -20,6 +20,10 @@ import {
 import { Registro } from "./paginas/Registro";
 import { Login } from "./paginas/Login";
 import { Panel } from "./paginas/Panel";
+import {
+    PanelEditar,
+    loader as panelEditarLoader,
+} from "./paginas/PanelEditar";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +46,11 @@ const router = createBrowserRouter([
             { element: <Registro />, path: "/registro" },
             { element: <Login />, path: "/login" },
             { element: <Panel />, path: "/panel" },
+            {
+                element: <PanelEditar />,
+                loader: panelEditarLoader,
+                path: "/panel-editar/:id",
+            },
             { element: <Error404 />, path: "*" },
         ],
         element: <Frontend />,
