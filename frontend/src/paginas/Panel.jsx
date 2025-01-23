@@ -62,6 +62,22 @@ export const Panel = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (categoriaId == 0) {
+            alert("debe seleccionar una categoría");
+            return false;
+        }
+        if (nombre == 0 || nombre == "") {
+            alert("el nombre es obligatorio");
+            return false;
+        }
+        if (tiempo == 0 || tiempo == "") {
+            alert("el tiempo es obligatorio");
+            return false;
+        }
+        if (descripcion == 0 || descripcion == "") {
+            alert("la descripción es obligatoria");
+            return false;
+        }
     };
 
     return (
