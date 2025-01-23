@@ -243,3 +243,12 @@ npm install axios
 ```bash
 npm install --save @fancyapps/ui
 ```
+
+# Desplegar en producción
+
+```bash
+npm run build
+```
+
+Esto crea el directorio `dist`, el cual podemos llevarnos a nuestro servidor apache o nginx.
+Para apache necesitamos el archivo `.htaccess`.
