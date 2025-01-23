@@ -77,7 +77,7 @@ export class RecetasService {
     if (existe) {
       fs.unlink(`./assets/uploads/recetas/${foto}`, () => {});
       throw new HttpException(
-        'Ya existe la categoría', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
+        'Ya existe la receta', // {estado: HttpStatus.NOT_FOUND, mensaje: "no encontrado"},
         HttpStatus.CONFLICT,
         // {
         //   cause: {name: 'Error 404', message: new Error('Registro no encontrado')},

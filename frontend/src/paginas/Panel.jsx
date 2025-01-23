@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox.css";
 import Modal from "react-bootstrap/Modal";
+import { guardarReceta } from "../servicios/PanelService";
 
 export const Panel = () => {
     const { handleValidaLogin } = useContext(AuthContext);
@@ -60,7 +61,7 @@ export const Panel = () => {
         setCategoriaId(0);
         setShow(!show);
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (categoriaId == 0) {
             alert("debe seleccionar una categoría");
@@ -78,6 +79,15 @@ export const Panel = () => {
             alert("la descripción es obligatoria");
             return false;
         }
+        if (accion == 1) {
+            try {
+                await guardarReceta(tiempo, categoriaId, descripcion, nombre);
+                alert("Receta creada exitosamente");
+            } catch (error) {
+                alert("Error al guardar la receta: " + error);
+            }
+        }
+        window.location = "/panel";
     };
 
     return (
