@@ -53,12 +53,24 @@ export const Panel = () => {
     const [descripcion, setDescripcion] = useState("");
     const [categoriaId, setCategoriaId] = useState("");
     const [accion, setAccion] = useState(1);
+    const [accionId, setAccionId] = useState();
+
     const handleCrear = () => {
         setAccion(1);
         setNombre("");
         setTiempo("");
         setDescripcion("");
         setCategoriaId(0);
+        setShow(!show);
+    };
+    const handleEditar = (receta) => {
+        setAccion(2);
+        setAccionId(receta.id);
+        setNombre(receta.nombre);
+        setTiempo(receta.tiempo);
+        setDescripcion(receta.descripcion);
+        setCategoriaId(receta.categoria_id);
+        
         setShow(!show);
     };
     const handleSubmit = async (e) => {
@@ -167,19 +179,20 @@ export const Panel = () => {
                                                     </Link>
                                                 </td>
                                                 <td>
-                                                    <Link
+                                                <Link
                                                         className="mr-2"
                                                         title="Editar Foto"
-                                                        to={`/panel-editar/${dato.id}`}
                                                     >
                                                         <i className="fas fa-pen-square"></i>
                                                     </Link>
-                                                    <Link
-                                                        className="mr-2"
+                                                    <button
+                                                        className="btn btn-link"
                                                         title="Editar"
+                                                        onClick={()=>handleEditar(dato)}
                                                     >
                                                         <i className="fas fa-edit"></i>
-                                                    </Link>
+                                                    </button>
+                                                    
                                                     <Link
                                                         className="mr-2"
                                                         title="Eliminar"
@@ -213,6 +226,7 @@ export const Panel = () => {
                                     onChange={(e) =>
                                         setCategoriaId(e.target.value)
                                     }
+                                    value={categoriaId}
                                 >
                                     <option value="0">Selecione...</option>
                                     {categorias.map((categoria) => (
