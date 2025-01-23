@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox.css";
 import Modal from "react-bootstrap/Modal";
-import { editarReceta, guardarReceta } from "../servicios/PanelService";
+import {
+    editarReceta,
+    eliminarReceta,
+    guardarReceta,
+} from "../servicios/PanelService";
 
 export const Panel = () => {
     const { handleValidaLogin } = useContext(AuthContext);
@@ -112,6 +116,18 @@ export const Panel = () => {
         window.location = "/panel";
     };
 
+    const handleEliminar = async (id) => {
+        if (window.confirm("Desea eliminar este registro?")) {
+            try {
+                await eliminarReceta(id);
+                alert("Registro eliminado");
+            } catch (error) {
+                alert(`Error: ${error}`);
+            }
+            window.location = "/panel";
+        }
+    };
+
     return (
         <>
             <div
@@ -206,12 +222,17 @@ export const Panel = () => {
                                                         <i className="fas fa-edit"></i>
                                                     </button>
 
-                                                    <Link
-                                                        className="mr-2"
+                                                    <button
+                                                        className="btn btn-link text-danger"
                                                         title="Eliminar"
+                                                        onClick={() =>
+                                                            handleEliminar(
+                                                                dato.id
+                                                            )
+                                                        }
                                                     >
                                                         <i className="fas fa-trash"></i>
-                                                    </Link>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         ))}

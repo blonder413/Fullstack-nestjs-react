@@ -63,3 +63,20 @@ export const editarFoto = async (id) => {
 
     return respuesta.status;
 };
+
+export const eliminarReceta = async (id) => {
+    const respuesta = await fetch(
+        `${import.meta.env.VITE_API_URL}recetas/${id}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                    "recetas_flaites_token"
+                )}`,
+                "content-type": "Application/json",
+            },
+        }
+    );
+
+    await respuesta.json();
+};
